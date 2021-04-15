@@ -1,0 +1,175 @@
+﻿<include file="Public/header"/>
+<include file="Public/menu"/>
+<div class="page-content">
+	<div class="page-header">
+		<h1>
+			公司管理
+			<small>
+				<i class="icon-double-angle-right"></i>
+				修改资料
+			</small>
+		</h1>
+	</div>
+	<!-- /.page-header -->
+	<!-- PAGE CONTENT BEGINS -->
+	<div class="row">
+		<div class="col-xs-12">
+			<div class="row">
+				<div class="tabbable">
+					<ul class="nav nav-tabs" id="myTab">
+						<li>
+							<a href="{:U('Company/index')}">
+								<i class="green icon-home bigger-110"></i>
+								公司列表
+							</a>
+						</li>
+						<li class="active">
+							<a >
+								<i class="green icon-edit bigger-110"></i>
+								修改资料
+							</a>
+						</li>
+					</ul>
+					<div class="tab-content">
+						<div class="tab-pane in active">
+							<form  id="ajaxForm" class="form-horizontal" action='{:U("Company/update")}' method="post">
+								<input type="hidden" name="id" value="{$data.id}"/>
+								<div class="form-group">
+									<label class="col-sm-3 control-label no-padding-right" > 企业名称</label>
+									<div class="col-sm-9">
+										<input type="text"  name="cname" class="col-xs-10 col-sm-5" value="{$data.cname}"/>
+									</div>
+								</div>
+								<div class="form-group">
+									<label class="col-sm-3 control-label no-padding-right">所在城市</label>
+									<div class="col-sm-2">
+										<select class=" width-80 form-control" name="nowcid">
+											<foreach name="city" item="v">
+												<option value="{$v.id}" <eq name="data.nowcid" value="$v.id">selected</eq>>{$v.name}</option>
+											</foreach>
+										</select>
+									</div>
+								</div>
+								<div class="form-group">
+									<label class="col-sm-3 control-label no-padding-right" > 详细地址</label>
+									<div class="col-sm-9">
+										<input type="text"  name="address" class="col-xs-10 col-sm-5" value="{$data.address}"/>
+									</div>
+								</div>
+								<div class="form-group">
+									<label class="col-sm-3 control-label no-padding-right">企业规模</label>
+									<div class="col-sm-3">
+										<select class=" width-80 form-control" name="sizeid">
+											<foreach name="size" item="v">
+												<option value="{$v.id}" <eq name="data.sizeid" value="$v.id">selected</eq> >{$v.tagname}</option>
+											</foreach>
+										</select>
+									</div>
+								</div>
+								<div class="form-group">
+									<label class="col-sm-3 control-label no-padding-right">公司性质</label>
+									<div class="col-sm-3">
+										<select class=" width-80 form-control" name="attrid">
+											<foreach name="attr" item="v">
+												<option value="{$v.id}" <eq name="data.attrid" value="$v.id">selected</eq> >{$v.tagname}</option>
+											</foreach>
+										</select>
+									</div>
+								</div>
+								<div class="form-group">
+									<label class="col-sm-3 control-label no-padding-right">所属行业</label>
+									<div class="col-sm-3">
+										<select class=" width-80 form-control" name="industryid">
+											<foreach name="industry" item="v">
+												<option value="{$v.id}" <eq name="data.industryid" value="$v.id">selected</eq> >{$v.tagname}</option>
+											</foreach>
+										</select>
+									</div>
+								</div>
+								<div class="form-group">
+									<label class="col-sm-3 control-label no-padding-right" > 一句话介绍</label>
+									<div class="col-sm-9">
+										<input type="text"  name="one" class="col-xs-12 col-sm-8" value="{$data.one}"/>
+									</div>
+								</div>
+								<div class="form-group">
+									<label class="col-sm-3 control-label no-padding-right"> 企业介绍 </label>
+									<div class="col-sm-9">
+										<textarea  class="col-xs-8" rows="8" name="description">{$data.description}</textarea>
+
+									</div>
+								</div>
+								<div class="form-group">
+									<label class="col-sm-3 control-label no-padding-right" > 企业网站</label>
+									<div class="col-sm-6">
+										<input type="text"  name="website" class="col-xs-6 col-sm-8" value="{$data.website}"/>
+									</div>
+								</div>
+								<div class="form-group">
+									<label class="col-sm-3 control-label no-padding-right" > 联系人</label>
+									<div class="col-sm-6">
+										<input type="text"  name="contact" class="col-xs-6 col-sm-8" value="{$data.contact}"/>
+									</div>
+								</div>
+								<div class="form-group">
+									<label class="col-sm-3 control-label no-padding-right" > 联系方式</label>
+									<div class="col-sm-6">
+										<input type="text"  name="phone" class="col-xs-6 col-sm-8" value="{$data.phone}"/>
+									</div>
+								</div>
+								<div class="form-group">
+									<label class="col-sm-3 control-label no-padding-right" > Logo</label>
+									<div class="col-sm-6">
+										<img src="__PUBLIC__{$data.logo}" alt="" width="180">
+									</div>
+								</div>
+								<div class="form-group">
+									<label class="col-sm-3 control-label no-padding-right">企业级别</label>
+									<div class="col-sm-2">
+										<select class=" width-80 form-control" name="level">
+											<foreach name="level" item="v" key="k">
+												<option value="{$k}" <eq name="data.level" value="$k">selected</eq>>{$v}</option>
+											</foreach>
+										</select>
+
+									</div>
+								</div>
+								<div class="form-group">
+									<label class="col-sm-3 control-label no-padding-right" > 状态</label>
+									<div class="col-sm-2">
+										<input type="radio" name="status" class="ace"
+										<eq name="data.status" value="1">checked<else/></eq>
+										<eq name="data.status" value="">checked<else/></eq> value="1"/>
+										<span class="lbl"> 显示 </span>
+										<input  type="radio" name="status" class="ace"
+										<eq name="data.status" value="2">checked<else/></eq> value="2"/>
+
+										<span class="lbl"> 禁用 </span>
+									</div>
+								</div>
+
+								<div class="space-4"></div>
+
+								<div class="clearfix form-actions">
+									<div class="col-md-offset-3 col-md-9">
+										<button class="btn btn-info" type="submit">
+											<i class="icon-ok bigger-110"></i>
+											提交
+										</button>
+									</div>
+								</div>
+							</form>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- PAGE CONTENT END -->
+</div>
+</div>
+</div>
+
+<!-- inline scripts related to this page -->
+<include file="Public/footer"/>
+

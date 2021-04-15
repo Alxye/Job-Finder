@@ -1,0 +1,119 @@
+<include file="./APP/Home/View/Public/header.html" xmlns="http://www.w3.org/1999/html"/>
+<div class="container">
+	<div class="row">
+		<div class="container" style="position:relative;">
+			<h3 class="">{$truename}&nbsp;</h3>
+			<div class="resume-view">
+				<div id="basic">
+					<legend>基本信息</legend>
+					<empty name="basic">
+						<div class="text-primary">无基本信息</div>
+					</empty>
+					<notempty name="basic">
+					<dl class="dl-horizontal" style="width: 800px;">
+						<dt>基本</dt>
+						<dd>{$basic.truename}&nbsp;&nbsp;|&nbsp;&nbsp;
+							{$basic.sex}&nbsp;&nbsp;|&nbsp;&nbsp;
+							{$basic.birthday}
+						</dd>
+						<dt>联系方式</dt>
+						<dd>{$basic.email}&nbsp;&nbsp;|&nbsp;&nbsp;{$basic.phone}</dd>
+						<dt>学历</dt>
+						<dd>{$basic.eid}</dd>
+						<dt>工作经验</dt>
+						<dd>{$basic.year}</dd>
+						<dt>现居地</dt>
+						<dd>{$basic.nowcid}</dd>
+						<dt>籍贯</dt>
+						<dd>{$basic.oldcid}</dd>
+						<dt>当前状态</dt>
+						<dd>{$basic.status}</dd>
+					</dl>
+					</notempty>
+				</div>
+				<div id="expect">
+					<legend>求职意向</legend>
+					<empty name="basic.desc">
+						<div class="text-primary">无求职意向</div>
+					</empty>
+					<dl class="dl-horizontal">
+						<dt>期望城市</dt>
+						<dd>{$basic.hopecid}</dd>
+						<dt>期望职位</dt>
+						<dd>{$basic.hopejob}</dd>
+						<dt>期望薪资</dt>
+						<dd>{$basic.hopepay}</dd>
+					</dl>
+				</div>
+				<div id="introduction">
+					<legend>自我描述</legend>
+					<empty name="basic.desc">
+						<div class="text-primary">无自我描述</div>
+					</empty>
+					<dl class="dl-horizontal">
+						<dt>自我描述</dt>
+						<dd><p>{$basic.desc}</p></dd>
+					</dl>
+				</div>
+				<div id="company">
+					<legend>工作经历</legend>
+					<empty name="work">
+						<div class="text-primary">无工作经历</div>
+					</empty>
+					<ul class="list-unstyled resume-item-group">
+						<notempty name="work">
+						<foreach name="work" item="w">
+						<li><h4>{$w.starttime} &nbsp;-&nbsp;
+							{$w.stoptime} &nbsp;&nbsp;&nbsp;&nbsp;
+							{$w.comname} &nbsp;&nbsp;&nbsp;&nbsp;
+							{$w.job} &nbsp;&nbsp;&nbsp;&nbsp;
+							{$w.pay}</h4>
+
+							<p>{$w.wdesc}</p>
+						</li>
+						</foreach>
+						</notempty>
+					</ul>
+				</div>
+				<div id="project">
+					<legend>项目经验</legend>
+					<empty name="project">
+						<div class="text-primary">无工作经历</div>
+					</empty>
+					<ul class="list-unstyled resume-item-group">
+						<notempty name="project">
+						<foreach name="project" item="p">
+						<li><h4>{$p.starttime} &nbsp;-&nbsp;
+							{$p.stoptime}
+							&nbsp;&nbsp;&nbsp;&nbsp;
+							{$p.pname} &nbsp;&nbsp;&nbsp;&nbsp;
+							{$p.post}</h4>
+
+							<p>{$p.prodesc}</p>
+						</li>
+						</foreach>
+						</notempty>
+					</ul>
+				</div>
+				<div id="education">
+					<legend>教育经历</legend>
+					<empty name="education">
+						<div class="text-primary">无教育经历</div>
+					</empty>
+					<ul class="list-unstyled resume-item-group resume-item-group-sm">
+						<notempty name="education">
+						<foreach name="education" item="e">
+						<li><h4><span>{$e.starttime} - {$e.stoptime}</span>&nbsp;&nbsp;&nbsp;&nbsp;
+							<span>{$e.school}</span>&nbsp;&nbsp;&nbsp;&nbsp;
+							<span>{$e.specialty}</span>&nbsp;&nbsp;&nbsp;&nbsp;
+							<span>{$e.seid}</span></h4>
+						</li>
+						</foreach>
+						</notempty>
+					</ul>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<include file="./APP/Home/View/Public/footer.html"/>

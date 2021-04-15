@@ -1,0 +1,151 @@
+﻿<include file="Public/header"/>
+<include file="Public/menu"/>
+<div class="page-content">
+	<div class="page-header">
+		<h1>
+			广告
+			<small>
+				<i class="icon-double-angle-right"></i>
+				<eq name="Think.ACTION_NAME" value="edit">修改广告<else/>添加广告</eq>
+			</small>
+		</h1>
+	</div>
+	<!-- /.page-header -->
+	<!-- PAGE CONTENT BEGINS -->
+	<div class="row">
+		<div class="col-xs-12">
+			<div class="row">
+				<div class="tabbable">
+					<ul class="nav nav-tabs" id="myTab">
+						<li>
+							<a href="{:U('News/index')}">
+								<i class="green icon-home bigger-110"></i>
+								广告列表
+							</a>
+						</li>
+						<li class="active">
+							<a >
+								<i class="green icon-edit bigger-110"></i>
+								<eq name="Think.ACTION_NAME" value="edit">修改广告<else/>添加广告</eq>
+							</a>
+						</li>
+					</ul>
+					<div class="tab-content">
+						<div class="tab-pane in active">
+							<form  id="ajaxForm" class="form-horizontal" action="
+							<eq name='Think.ACTION_NAME' value='edit'>{:U('News/update')}<else/>{:U('News/insert')}</eq>" method="post" enctype="multipart/form-data">
+								<input type="hidden" name="id" value="{$data.id}"/>
+								<input type="hidden" name="module" value="{$data.module}"/>
+								<div class="form-group">
+									<label class="col-sm-3 control-label no-padding-right">广告分类</label>
+									<div class="col-sm-2">
+										<select class=" width-80 form-control" name="cid">
+											<option value="">全部分类</option>
+											<volist name="list" id="vo">
+												<option value="{$vo.id}" <if condition="$data['cid'] eq $vo['id']">selected</if> >{$vo.name}</option>
+											</volist>
+										</select>
+									</div>
+								</div>
+
+								<div class="space-4"></div>
+
+								<div class="form-group">
+									<label class="col-sm-3 control-label no-padding-right" > 广告标题 </label>
+									<div class="col-sm-9">
+										<input type="text"  name="title" placeholder="请输入标题" class="col-xs-10 col-sm-5" value="{$data.title}"/>
+									</div>
+								</div>
+								<div class="form-group">
+									<label class="col-sm-3 control-label no-padding-right" > 标题图片 </label>
+									<div class="col-sm-4">
+										<input type="file" id="id-input-file-2" name="thumb" value="{$data.thumb}"/>
+									</div>
+								</div>
+								<div class="form-group">
+									<label class="col-sm-3 control-label no-padding-right"
+									      > 内容简介 </label>
+									<div class="col-sm-9">
+										<textarea  class="col-xs-8" rows="5" name="desc">{$data.introduce}</textarea>
+
+									</div>
+								</div>
+
+								<div class="form-group">
+									<label class="col-sm-3 control-label no-padding-right" > 内容</label>
+									<div class="col-sm-9">
+										<textarea class="col-xs-8" rows="5" name="content">{$data.content}</textarea>
+									</div>
+								</div>
+								<div class="form-group">
+								<label class="col-sm-3 control-label no-padding-right" > 广告等级</label>
+									<div class="col-sm-2">
+									<select name="level">
+										<option value="1" selected <if condition="$data.level eq 1">selected</if>>普通广告</option>
+										<option value="2" <if condition="$data.level eq 2">selected</if>>幻灯图片广告</option>
+									</select>
+									</div>
+									</div>
+								<div class="form-group">
+									<label class="col-sm-3 control-label no-padding-right" > 状态</label>
+									<div class="col-sm-2">
+										<input type="radio" name="status" class="ace"
+										       <eq name="data.status" value="1">checked<else/></eq>
+												<eq name="data.status" value="">checked<else/></eq> value="1"/>
+										<span class="lbl"> 已发布 </span>
+										<input  type="radio" name="status" class="ace"
+										<eq name="data.status" value="2">checked<else/></eq> value="2"/>
+
+										<span class="lbl"> 未审核 </span>
+									</div>
+								</div>
+
+								<div class="space-4"></div>
+
+								<div class="clearfix form-actions">
+									<div class="col-md-offset-3 col-md-9">
+										<button class="btn btn-info" type="submit">
+											<i class="icon-ok bigger-110"></i>
+											提交
+										</button>
+									</div>
+								</div>
+							</form>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- PAGE CONTENT END -->
+</div>
+</div>
+</div>
+
+<!-- inline scripts related to this page -->
+<script type="text/javascript">
+	seajs.use(['$','ue','ace-elements'],function($,ue){
+		//编辑器配置
+		UEDITOR_CONFIG.initialFrameHeight = 500;
+		UEDITOR_CONFIG.imageUrl  = "{:U('imgUpload',array(module=>'news'))}";//图片上传路径
+		UEDITOR_CONFIG.savePath  = ["{:C('UPLOAD_PATH')}Picture/news"];
+		UEDITOR_CONFIG.imagePath = "{:C('IMG_URL')}";//图片访问路径
+		ue.getEditor('content');
+
+		//标题图配置
+		$('#id-input-file-1 ,#id-input-file-2').ace_file_input({
+			no_file:'未选择图片 ...',
+			btn_choose:'选择图片',
+			btn_change:'改变图片',
+			droppable:false,
+			onchange:null,
+			thumbnail:'large', //| true | large
+			whitelist:'gif|png|jpg|jpeg'
+			//blacklist:'exe|php'
+			//onchange:''
+			//
+		});
+	});
+</script>
+<include file="Public/footer"/>
+

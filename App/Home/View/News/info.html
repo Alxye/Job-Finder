@@ -1,0 +1,27 @@
+<include file="Public/header"/>
+<link rel="stylesheet" type="text/css" href="__PUBLIC__/Css/Common/index_aio.min.css">
+<!--main start=============主体-->
+<div class="container">
+	<div class="row">
+		<div class="col-xs-9 col-2-left discovery" style="padding-bottom:20px;">
+            <h3>{$info.title}</h3>
+			<p class="text-label pull-group">
+                <span class="pull-right">查看次数：&nbsp;{$info.hits}</span>
+                <span class="pull-right" style="margin-right:50px;">{$info.addtime|date="Y-m-d",###}</span>
+            </p>
+			<div class="clear"></div>
+			<div class="discovery-content">
+				<div class="discovery-editor-content" id="js-content-editor">
+					{$content}
+				<hr/>
+				</div>
+        <!--详情页右侧菜单 start-->
+        <include file="Public/newsInfo"/>
+        <!--详情页右侧菜单 end-->
+		</div>
+
+		</div>
+	</div>
+</div>
+<!--main end=============主体-->
+<include file="Public/footer"/>

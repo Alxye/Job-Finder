@@ -1,0 +1,109 @@
+﻿<include file="Public/header"/>
+<include file="Public/menu"/>
+
+<div class="page-content">
+	<div class="page-header">
+		<h1>
+			角色管理
+			<small>
+				<i class="icon-double-angle-right"></i>
+				配置节点
+			</small>
+		</h1>
+	</div>
+	<!-- /.page-header -->
+	<!-- PAGE CONTENT BEGINS -->
+	<div class="row">
+		<div class="col-xs-12">
+			<div class="row">
+				<div class="tabbable">
+					<ul class="nav nav-tabs" id="myTab">
+						<li>
+							<a href="{:U('Role/index')}">
+								<i class="green icon-home bigger-110"></i>
+								角色列表
+							</a>
+						</li>
+						<li >
+							<a href="{:U('Role/add')}">
+								<i class="green icon-edit bigger-110"></i>
+								添加角色
+							</a>
+						</li>
+						<li class="active">
+							<a>
+								<i class="green icon-edit bigger-110"></i>
+								配置节点
+							</a>
+						</li>
+					</ul>
+					<div class="tab-content">
+						<form action="{:U('Role/set')}" method="post" id="ajaxForm">
+						<foreach name="list" item="module">
+							<input type="hidden" name="id" value="{$Think.get.id}"/>
+							<div class="module">
+								<h3 class="header smaller lighter blue">
+									<input name="nodeids[]" type="checkbox" class="ace" level="module" value="{$module.id}" {$module.checked}/>
+									<span class="lbl"> {$module.title}</span>
+								</h3>
+								<notempty name="module.children">
+									<div class="row">
+									<foreach name="module.children" item="controller">
+											<div class="col-xs-2 ">
+												<div class="control-group">
+													<label class="control-label bolder blue">
+														<input name="nodeids[]" type="checkbox" class="ace" level="controller" value="{$controller.id}" {$controller.checked}/>
+														<span class="lbl"> {$controller.title}</span>
+													</label>
+													<notempty name="controller.children">
+														<foreach name="controller.children" item="action">
+													<div class="checkbox">
+														<label>
+															<input name="nodeids[]" type="checkbox" class="ace" level="action" value="{$action.id}" {$action.checked}/>
+															<span class="lbl"> {$action.title}</span>
+														</label>
+													</div>
+														</foreach>
+													</notempty>
+												</div>
+											</div>
+									</foreach>
+									</div>
+								</notempty>
+							</div>
+						</foreach>
+							<hr/>
+							<div class="center">
+								<button class="btn btn-info " type="submit">
+									<i class="icon-ok bigger-110"></i>
+									保存配置
+								</button>
+							</div>
+						</form>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- PAGE CONTENT END -->
+</div>
+</div>
+</div>
+<!-- inline scripts related to this page -->
+<script type="text/javascript">
+	seajs.use(['$'],function($){
+		$("input[level=module]").change(function(){
+			$(this).parents("div.module").find("input[type=checkbox]").prop("checked",      $(this).prop("checked"));
+		})
+		$("input[level=controller]").change(function(){
+			$(this).parents("div.control-group").find("input[type=checkbox]").prop("checked",      $(this).prop("checked"));
+			$(this).parents("div.module").find("input[level=module]").prop("checked",true);
+		})
+		$("input[level=action]").change(function(){
+			$(this).parents("div.module").find("input[level=module]").prop("checked",true);
+			$(this).parents("div.control-group").find("input[level=controller]").prop("checked",true);
+		})
+	})
+</script>
+<include file="Public/footer"/>
+

@@ -1,0 +1,18 @@
+<style>
+	.wei-user-logo-hot img {
+		width: 88px;
+		height: 88px;
+	}
+</style>
+<div class="box">
+	<div class="box-title">热招企业</div>
+	<ul class="box-hot-wei-user">
+		<foreach name="hotcompany" item="vo">
+		<li class="wei-user-logo wei-user-logo-hot">
+			<a href="{:U('Company/item')}?comid={$vo.id}" target="_blank" title="{$vo.cname}">
+				<img src="__PUBLIC__{$vo.logo}" alt="{$vo.cname}"/>
+			</a>
+		</li>
+		</foreach>
+	</ul>
+</div>

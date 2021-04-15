@@ -1,0 +1,124 @@
+<include file="./APP/Home/View/Public/header.html" xmlns="http://www.w3.org/1999/html"/>
+<h1 class="h1_tit" style="padding-top:20px">我的职业收藏</h1>
+<style type="text/css">    .job-list .right {
+    padding-right: 15px;
+}
+
+.job-list li {
+    position: relative;
+}
+
+.job-list li .close-button {
+    position: absolute;
+    right: 5px;
+    top: 5px;
+}
+
+.job-list li:last-child {
+    border-bottom: none;
+}
+</style>
+<div class="main">
+    <div style="padding: 10px;">
+        <h3 id="empty_tip" class="text-primary"
+            style="text-align: center; margin: 160px 0; display:<notempty name='job'>none</notempty>;">暂无任何职位收藏</h3>
+        <ul class="job-list">
+            <foreach name="job" item="job">
+                <li id="{$job.rand}">
+                    <div class="right"><strong>￥{$job.payid}</strong></div>
+                    <div class="wei-user-logo left imgLiquid_bgSize imgLiquid_ready"
+                         style=" background-size: contain; background-position: 50% 50%; background-repeat: no-repeat;">
+                        <a href="{:U('Home/Company/item?comid='.$job['comid'])}" target="_blank" title=""
+                           style="display: block; width: 100%; height: 100%;">
+
+                            <img src="__PUBLIC__{$job.logo}" alt="Logo" style="display;">
+                        </a>
+                    </div>
+                    <div class="job-title">
+					<span class="text-muted small">
+						[<a href="{:U('Home/Job/item?jobid='.$job['id'])}">{$job.name}</a>]
+                    </span>
+                        <a href="{:U('Home/Job/item?jobid='.$job['id'])}" target="_blank" title="{$job.title}">{$job.title}</a>
+                    </div>
+                    <p>
+					<span>
+						<a class="muted" href="{:U('Home/Company/item?comid='.$job['comid'])}" target="_blank"
+                           title="{$job.cname}">{$job.cname}</a>
+					</span>
+                        <span class="text-muted">更新于：{$job.edittime}</span>
+                        <span class="text-muted">{$job.workyear}工作经验</span>
+                        <span class="text-muted">{$job.edu}</span>
+                    </p>
+
+                    <div class="close-button">
+                        <a href="javascript:;" data-job-id="" onclick="delItem({$job.id},{$job.rand})"><i
+                                class="icon icon-remove"></i></a>
+                    </div>
+                </li>
+            </foreach>
+        </ul>
+    </div>
+</div>
+
+<h1 class="h1_tit" style="padding-top:20px">我的企业收藏</h1>
+<div class="main">
+    <div style="padding: 10px;">
+        <h3 id="empty_tip" class="text-primary"
+            style="text-align: center; margin: 160px 0; display:<notempty name='company'>none</notempty>;">暂无任何企业收藏</h3>
+        <ul class="job-list">
+            <foreach name="company" item="company">
+                <li id="{$company.rand}">
+                    <div class="wei-user-logo left imgLiquid_bgSize imgLiquid_ready"
+                         style=" background-size: contain; background-position: 50% 50%; background-repeat: no-repeat;">
+                        <a href="{:U('Home/Company/item?comid='.$company['comid'])}" target="_blank" title=""
+                           style="display: block; width: 100%; height: 100%;">
+
+                            <img src="__PUBLIC__{$company.logo}" alt="Logo" style="">
+                        </a>
+                    </div>
+                    <div class="company-title">
+      <span class="text-muted small">
+         [<a href="{:U('Home/Company/item?companyid='.$company['id'])}">{$company.name}</a>]
+                 </span>
+                        <a href="{:U('Home/Company/item?companyid='.$company['id'])}" target="_blank"
+                           title="{$company.title}">{$company.cname}</a>
+                    </div>
+                    <p>
+                        <span class="text-muted">所在城市：{$company.city}</span>
+                        <span class="text-muted">所在行业：{$company.industryid}</span>
+                    </p>
+
+                    <div class="close-button">
+                        <a href="javascript:;" data-company-id="" onclick="delItem({$company.id},{$company.rand})"><i
+                                class="icon icon-remove"></i></a>
+                    </div>
+                </li>
+            </foreach>
+
+
+        </ul>
+    </div>
+</div>
+
+<script type="text/javascript">
+    function delItem($item_id, $rand) {
+        bootbox.confirm('确定要取消收藏?', function (res) {
+            if (res == true) {
+                $.ajax({
+                    url: "{:U('User/Favorite/deleteItem')}",
+                    data: 'jid=' + $item_id,
+                    type: 'post',
+                    success: function (data) {
+                        if (data) {
+                            $('#' + $rand).hide();
+                        } else {
+                            bootbox.alert('请求失败,请稍后再试');
+                        }
+                    }
+                });
+            }
+        });
+
+    }
+</script>
+<include file="./APP/Home/View/Public/footer.html"/>

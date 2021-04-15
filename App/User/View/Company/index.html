@@ -1,0 +1,187 @@
+<extend name="Public:company_center"/>
+
+<block name="right_main">
+<div class="col-xs-15 col-md-10 wei-user-admin-content">
+<style type="text/css">    #update_profile_form .form-group:last-child {
+	margin-bottom: 0px;
+}
+#upload_logo_form .form-group:first-child {
+	margin-bottom: 20px;
+}
+#logo {
+	position: relative;
+}
+#logo a {
+	position: absolute;
+	bottom: 0;
+	left: 200px;
+}
+#logo_img {
+	width: 180px;
+	height: 180px;
+}
+#logo-edit-btn {
+	width: 180px;
+	height: 30px;
+	line-height: 30px;
+	color: #FFF;
+	text-align: center;
+	background-color: rgba(0, 0, 0, 0.3);
+	position: absolute;
+	left: 0;
+	bottom: 0;
+	cursor: pointer;
+}
+#logo_select {
+	text-align: center;
+}
+#logo_select h1 {
+	margin: 0 0 0 30px;
+	text-align: left;
+}
+#logo_select > div {
+	padding: 10px 30px;
+}
+#logo_select img {
+	width: 310px;
+}
+#logo_select .preview_face {
+	float: left;
+	position: relative;
+	width: 180px;
+	height: 180px;
+	overflow: hidden;
+	margin-left: 10px;
+}
+</style>
+<div class="wei-user-admin-title-bar">
+	<div class="container-nav-tabs-2">
+		<ul class="nav nav-tabs-2" role="tablist">
+			<li class="active"><a href="javascript:void(0)">企业信息</a></li>
+		</ul>
+	</div>
+</div>
+<form class="form-horizontal" id="basic_form" method="post" action="{:U('company/update')}" enctype="multipart/form-data">
+	<div class="form-group">
+		<label class="col-sm-2 control-label" for="name"><span>*</span>&nbsp;企业名称</label>
+		<div class="col-sm-5">
+			<input class="form-control" type="text" id="name" name="cname" value="{$data.cname}" placeholder="与营业执照一致的企业全名">
+		</div>
+	</div>
+	<div class="form-group"><label class="col-sm-2 control-label" for="city_id"><span>*</span>&nbsp;所在城市</label>
+
+		<div class="col-sm-5">
+			<select class="form-control" name="nowcid" id="city_id" >
+				<foreach name="city" item="v">
+					<option value="{$v.id}" <eq name="data.nowcid" value="$v.id">selected</eq>>{$v.name}</option>
+				</foreach>
+		</select></div>
+	</div>
+	<div class="form-group">
+		<label class="col-sm-2 control-label" for="address">详细地址</label>
+		<div class="col-sm-5">
+			<input class="form-control" type="text" id="address" name="address" value="{$data.address}" placeholder="详细地址">
+		</div>
+	</div>
+	<div class="form-group">
+		<label class="col-sm-2 control-label" for="size"><span>*</span>&nbsp;企业规模</label>
+		<div class="col-sm-5">
+			<select class="form-control" name="sizeid" id="size">
+			<foreach name="size" item="v">
+				<option value="{$v.id}" <eq name="data.sizeid" value="$v.id">selected</eq> >{$v.tagname}</option>
+			</foreach>
+		</select>
+		</div>
+	</div>
+	<div class="form-group">
+		<label class="col-sm-2 control-label" ><span>*</span>&nbsp;公司性质</label>
+		<div class="col-sm-5">
+			<select class="form-control" name="attrid" >
+			<foreach name="attr" item="v">
+				<option value="{$v.id}" <eq name="data.attrid" value="$v.id">selected</eq> >{$v.tagname}</option>
+			</foreach>
+			</select>
+		</div>
+	</div>
+	<div class="form-group">
+		<label class="col-sm-2 control-label" for="industry_id"><span>*</span>&nbsp;所属行业</label>
+		<div class="col-sm-5">
+			<select class="form-control" name="industryid" id="industry_id">
+			<foreach name="industry" item="v">
+				<option value="{$v.id}" <eq name="data.industryid" value="$v.id">selected</eq> >{$v.tagname}</option>
+			</foreach>
+		</select>
+		</div>
+	</div>
+	<div class="form-group">
+		<label class="col-sm-2 control-label" for="abstract"><span>*</span>&nbsp;一句话亮点介绍</label>
+		<div class="col-sm-7">
+			<input class="form-control" type="text" id="abstract" name="one" value="{$data.one}" placeholder="如：团队优势、福利待遇、办公环境等">
+		</div>
+	</div>
+	<div class="form-group">
+		<label class="col-sm-2 control-label" for="description"><span>*</span>&nbsp;企业介绍</label>
+		<div class="col-sm-10">
+			<textarea class="form-control" rows="6" id="description" name="description" placeholder="">{$data.description}</textarea>
+			<span class="help-block">
+				介绍文案
+			</span>
+		</div>
+	</div>
+	<div class="form-group">
+		<label class="col-sm-2 control-label" for="website">企业网站</label>
+		<div class="col-sm-5">
+			<input class="form-control" type="text" id="website" name="website" value="{$data.website}" placeholder="公司网站或公司官方微博地址">
+		</div>
+	</div>
+	<div class="form-group">
+		<label class="col-sm-2 control-label" for="contact_name"><span>*</span>&nbsp;联系人</label>
+		<div class="col-sm-5">
+			<input class="form-control" type="text" id="contact_name" name="contact" value="{$data.contact}" placeholder="联系人姓名">
+		</div>
+	</div>
+	<div class="form-group">
+		<label class="col-sm-2 control-label" for="contact_phone"><span>*</span>&nbsp;联系方式</label>
+		<div class="col-sm-5">
+			<input class="form-control" type="text" id="contact_phone" name="phone" value="{$data.phone}" placeholder="手机或座机">
+		</div>
+	</div>
+	<br>
+	<div class="form-group">
+		<div class="col-sm-offset-2 col-sm-10">
+			<button id="submit-btn" type="submit" class="btn btn-lg btn-highlight btn-min-width-100" >保存</button>
+			&nbsp;
+		</div>
+	</div>
+</form>
+<script>
+	seajs.use(['$', 'form-ajax','bootstrap3.0','bootbox'], function ($) {
+
+		$('button.cancel').click(function(){
+			$('#origin_face_img').imgAreaSelect({
+				remove : true
+			});
+			$('#origin_face_img + div').remove();
+			$("#logo_select").modal("hide");
+		})
+
+		$("button#submit-btn").click(function(){
+				var ajaxFrom = $('#basic_form');
+				$.ajax({
+					url:ajaxFrom.attr('action'),
+					type:ajaxFrom.attr('method'),
+					data:ajaxFrom.serialize(),
+					success:function(data){
+						bootbox.alert({
+							message:data.info,
+							title: "提示信息"
+						});
+						return false;
+					}
+				})
+				return false;
+		});
+	})
+</script>
+</div>
+</block>

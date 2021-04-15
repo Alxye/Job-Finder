@@ -1,0 +1,101 @@
+<include file="Public/header"/>
+<include file="Public/menu"/>
+<div class="page-content">
+	<div class="page-header">
+		<h1>
+			简历管理
+			<small>
+				<i class="icon-double-angle-right"></i>
+				所有简历
+			</small>
+			<small>
+				<i class="icon-double-angle-right"></i>
+				详细资料
+			</small>
+		</h1>
+	</div>
+	<!-- /.page-header -->
+	<!-- PAGE CONTENT BEGINS -->
+	<div class="row">
+		<div class="col-xs-12">
+			<div class="row">
+				<div class="tabbable">
+					<ul class="nav nav-tabs" id="myTab">
+						<li>
+							<a href="{$url}">
+								<i class="green icon-group bigger-110"></i>
+								所有简历
+							</a>
+						</li>
+						<li class="active">
+							<a>
+								<i class="green icon-user bigger-110"></i>
+								详细资料
+							</a>
+						</li>
+					</ul>
+				</div>
+			</div>
+		</div>
+
+		<div  style="margin-top:50px">
+			<div class="tabbable tabs-left">
+				<ul class="nav nav-tabs" id="resume">
+					<li class="active">
+						<a data-toggle="tab" href="#basic">
+							基本资料
+						</a>
+					</li>
+
+					<li>
+						<a data-toggle="tab" href="#edu">
+							教育经历
+						</a>
+					</li>
+
+					<li>
+						<a data-toggle="tab" href="#pro">
+							项目经验
+						</a>
+					</li>
+					<li>
+						<a data-toggle="tab" href="#work">
+							工作经历
+						</a>
+					</li>
+				</ul>
+
+				<div class="tab-content padding-30">
+					<div id="basic" class="tab-pane in active col-xs-12">
+						<p class="lead">姓名：{$truename}&nbsp;&nbsp;&nbsp;性别：{$sex}&nbsp;&nbsp;&nbsp;出生日期：{$birthday}</p>
+						<p class="lead">邮箱：{$email}</p>
+						<p class="lead">联系电话：{$phone}</p>
+						<p class="lead">当前状态：{$status}</p>
+						<p class="lead">学历：{$eid}</p>
+						<p class="lead">自我描述：{$desc}</p>
+						<p class="lead">现居地：{$nowcid}&nbsp;&nbsp;&nbsp;籍贯：{$oldcid}</p>
+						<p class="lead">期望城市：{$hopecid}&nbsp;&nbsp;&nbsp;期望职位：{$hopejob}&nbsp;&nbsp;&nbsp;期望薪资：{$hopepay}</p>
+					</div>
+
+					<div id="edu" class="tab-pane">
+						<p class="lead">学历：{$eid}&nbsp;&nbsp;&nbsp;专业：{$specialty}</p>
+						<p class="lead">起止日期：{$esdate}&nbsp;&nbsp;&nbsp;毕业学校：{$school}</p>
+					</div>
+
+					<div id="pro" class="tab-pane">
+						<p class="lead">项目名称：{$name}</p>
+						<p class="lead">起止日期：{$psdate}&nbsp;&nbsp;&nbsp;担任职务：{$post}</p>
+						<p class="lead">项目描述：{$prodesc}</p>
+					</div>
+
+					<div id="work" class="tab-pane">
+						<p class="lead">企业名称：{$comid}&nbsp;&nbsp;&nbsp;职位名称：{$job}&nbsp;&nbsp;&nbsp;薪资：{$pay}</p>
+						<p class="lead">起止日期：{$sdate}&nbsp;&nbsp;&nbsp;工作描述：{$wdesc}</p>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- PAGE CONTENT END -->
+</div>
+<include file="Public/footer"/>

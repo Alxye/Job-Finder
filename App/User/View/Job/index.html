@@ -1,0 +1,110 @@
+<extend name="Public:company_center"/>
+
+<block name="right_main">
+	<link rel="stylesheet" type="text/css" href="__PUBLIC__/Css/Common/bootstrap-switch.min.css">
+	<div class="wei-user-admin-title-bar">
+		<div class="container-nav-tabs-2">
+			<ul class="nav nav-tabs-2" role="tablist">
+				<li <empty name="Think.get.status">class='active'</empty>> <a href="{:U('Job/index')}">全部职位</a></li>
+				<li <eq name="Think.get.status" value="1">class='active'</eq>><a href="{:U('Job/index?status=1')}">正在热招</a></li>
+				<li <eq name="Think.get.status" value="2">class='active'</eq>><a href="{:U('Job/index?status=2')}">已关闭职位</a></li>
+			</ul>
+		</div>
+		<div class="btn-toolbar btn-toolbar-inline">
+			<div class="btn-group">
+				<a href="{:U('Job/add')}" class="btn btn-primary">发布职位</a>
+			</div>
+		</div>
+	</div>
+	<table class="table table-hover table-striped">
+		<thead>
+		<tr>
+			<th style="width:160px;">职位名称</th>
+			<th style="width:80px;">招聘</th>
+			<th style="width:80px;">申请</th>
+			<th style="width:160px;">发布时间</th>
+			<th style="width:160px;">刷新时间</th>
+			<th style="width:70px;">状态</th>
+			<th style="width:180px;">操作</th>
+		</tr>
+		</thead>
+		</tbody>
+		<foreach name="list" item="v">
+			<tr >
+				<td>
+					<a class="text-primary" href="{:U('Home/Job/item?jobid='.$v['id'])}" target="_blank" title="{$v.title}">{$v.name}</a>
+				</td>
+				<td>{$v.num}人</td>
+				<td>{$v.apply}人</td>
+				<td>{:date('Y-m-d H:i',$v['addtime'])}</td>
+				<td class="refresh_time">{:tranTime($v['edittime'])}</td>
+				<td>
+					<input name="switch" type="checkbox" data-size="small" data-on-text="开启" data-off-text="关闭" data-on-color="success" data-off-color="danger"
+					<eq name="v.status" value="1">checked</eq> data-id="{$v.id}">
+				</td>
+				<td style="white-space:nowrap;">
+					<a href="{:U('Apply/index?jid='.$v['id'])}" class="btn btn-default">
+						<i class="fa fa-file-text"></i>
+						简历
+					</a>
+					<a href="javascript:void(0);" class="btn btn-default flush <eq name='v.status' value='2'>disabled</eq>" data-url="{:U('Job/flush?id='.$v['id'])}">
+						<i class="fa fa-refresh"></i>
+						刷新</a>
+					<a href="{:U('Job/edit?id='.$v['id'])}" class="btn btn-default">
+						<i class="fa fa-pencil"></i>
+						编辑
+					</a>
+				</td>
+			</tr>
+		</foreach>
+		</tbody>
+	</table>
+	<empty name="list">
+		<h3 class="text-center min-height-300" style="margin-top: 100px;">
+			您尚未发布职位&nbsp;<a class="text-primary" href="{:U('Job/add')}">立即发布</a>
+		</h3>
+	</empty>
+	<div class="page hidden">
+		{$show}
+	</div>
+	<script>
+		seajs.use(['$','bootstrap-switch'],function($){
+			$("[name='switch']").bootstrapSwitch().on('switchChange', function(e, data) {
+				var id = $(this).attr('data-id');
+				var status = data.value ? 1 : 2;
+				if(data.value){
+					$(this).parents('tr').find("a.flush").removeClass('disabled');
+				}else{
+					$(this).parents('tr').find("a.flush").addClass('disabled');
+				}
+				$.ajax({
+					url:"{:U('Job/update')}",
+					data:{status:status ,id:id},
+					type:'post',
+					success:function(data){
+						if(!data.status){
+							alert(data.info);
+						}
+					}
+				})
+			});
+			$("a.flush").click(function(){
+				var ob = $(this);
+				if(!ob.hasClass("disabled")){
+					if ( confirm("确定要刷新职位吗？") ) {
+						$.ajax({
+							url : ob.attr("data-url"),
+							success : function (data) {
+								bootbox.alert({
+									message : data.info,
+									title : "提示信息"
+								});
+								return false;
+							}
+						})
+					}
+				}
+			});
+		})
+	</script>
+</block>

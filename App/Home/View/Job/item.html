@@ -1,0 +1,222 @@
+﻿<include file="Home@Public/header"/>
+<link rel="stylesheet" type="text/css" href="__PUBLIC__/Css/Common/index_aio.min.css">
+<style>
+	.collectpic1 {
+		background: url('__PUBLIC__/images/job_s.png') no-repeat; width: 18px; height: 18px;
+	}
+	.collectpic2 {
+		background: url('__PUBLIC__/images/job_s_on.png') no-repeat; width: 18px; height: 18px;
+	}
+</style>
+<!--main start=============主体-->
+<div class="container">
+<div class="row">
+	<ol class="breadcrumb">
+
+		<li><a href="{:U('Job/index')}" class="text-label small">全部职位</a></li>
+		<li class="active small"><a href="{:U('Job/index')}?cid={$cid}" class="text-label small"></a>{$cidname}</li>
+		<li class="active small"><a href="{:U('Job/index')}?cid2={$cid2}" class="text-label small"></a>{$cid2name}</li>
+		<li class="active small">职位详细信息</li>
+
+	</ol>
+	<h3 class="ellipsis">{$jobitem.title}</h3>
+</div>
+<div class="row">
+	<!--详情页左边-->
+	<div class="col-xs-9 col-2-left" style="padding-bottom:20px;">
+		<h4>
+			<legend>{$jobitem.name}<em class="text-muted small pull-right">更新于:
+					{:tranTime($jobitem['edittime'])}
+			</em></legend>
+		</h4>
+		<div class="row job-detail-summary">
+			<div class="col-xs-8">
+				<ul class="list-inline">
+					<li>工作地点：{$jobitem.cityid}</li>
+					<li>工作年限：{$jobitem.year}</li>
+					<li>最低学历：{$jobitem.eid}</li>
+					<li>招聘人数：{$jobitem.num}</li>
+				</ul>
+			</div>
+			<div class="col-xs-4">
+				<ul class="list-unstyled">
+					<li>职位月薪：</li>
+					<li class="text-highlight job-salary">￥{$jobitem.payid}</li>
+				</ul>
+			</div>
+		</div>
+		<div class="row job-detail-button-group">
+			<ul class="list-inline text-center" style="position: relative;">
+				<li>
+					<empty name="appuser">
+						<empty name="apply">
+							<a class="btn btn-lg btn-highlight " href="{:U('User/Resume/apply?jobid='.$jobitem['id'])}" style="width: 130px;">立即申请</a>
+							<else/>
+							<a class="btn btn-lg btn-highlight" href="javascript:;" disabled="disabled" style="width: 130px;">已投递</a>
+						</empty>
+						<else/>
+						<a class="btn btn-lg btn-highlight" href="javascript:;" style="width: 130px;">立即申请</a>
+					</empty>
+
+
+				</li>
+				<li style="position: absolute">
+					<a class="btn btn-lg btn-default" id="oncollect" href="javascript:void(0);">
+						<i id="collectpic" class="
+							<empty name='collect'>
+								fa fa-star-o text-highlight
+							<else/>
+								fa text-highlight fa-star
+							</empty>
+							">
+						</i>
+					</a>
+
+					<script type="text/javascript">
+						seajs.use(['$', 'bootbox'], function ($) {
+
+							var uid = "{$_SESSION[\'user\'][\'id\']}";
+							var jid = "{$jobitem.id}";
+
+						$("#oncollect").click(function () {
+							//先判断是否登录
+							if ( uid > 0 ) {
+								//判断是否收藏
+								$.ajax({
+									type : "post",
+									url : "{:U('collect')}",
+									dataType : "html",
+									data : {'uid' : uid, 'jid' : jid},
+									success : function (data) {
+										if(data==4){
+											alert("企业帐户，不能收藏职位！");
+										}else if ( data == 1 ) {
+											//alert(data);
+											//清空原先的文字信息
+											$("#collect").empty();
+											//设置显示提示信息
+											$("#collect").attr({style : "width:100px;display:block;position: absolute; top: 50px;"}).html("收藏成功！");
+											$("#collectpic").attr({class : "fa text-highlight fa-star"});
+											setTimeout(function () {
+												$("#collect").attr({style : "width:100px;display:none;position: absolute; top: 50px;"}).html("收藏成功！");
+											}, 1500);
+										} else if ( data == 3 ) {
+//清空原先的文字信息
+											$("#collect").empty();
+											//设置显示提示信息
+											$("#collect").attr({style : "width:100px;display:block;position: absolute; top: 50px;"}).html("已取消收藏！");
+											$("#collectpic").attr({class : "fa fa-star-o text-highlight"});
+											setTimeout(function () {
+												$("#collect").attr({style : "width:100px;display:none;position: absolute; top: 50px;"}).html("已取消收藏！");
+											}, 1500);
+										} else {
+											//清空原先的文字信息
+											$("#collect").empty();
+											//设置显示提示信息
+											$("#collect").attr({style : "width:100px;display:block;position: absolute; top: 50px;"}).html("收藏失败！");
+											$("#collectpic").attr({class : "fa fa-star-o text-highlight"});
+											setTimeout(function () {
+												$("#collect").attr({style : "width:100px;display:none;position: absolute; top: 50px;"}).html("收藏失败！");
+											}, 1500);
+										}
+									}
+								});
+							} else {
+								bootbox.confirm('您还未登录，请登录后再收藏', function (result) {
+									if ( result ) {
+										window.location.href = "{:U('Home/Login/login')}";
+										return false;
+									}
+								});
+							}
+						})
+							//职位申请按钮状态
+							$(".btn-highlight").click(function(){
+								if ( uid > 0 ) {
+									//判断是否申请
+									$.ajax({
+										type : "post",
+										url : "{:U('apply')}",
+										dataType : "html",
+										data : {'uid' : uid, 'jid' : jid},
+										success : function (data) {
+											if(data==2){
+												alert('企业用户，不能申请职位。');
+											}
+											//alert(data);
+										}
+									});
+								}else {
+									alert('您还未登录，请登录后再申请职位。');
+								}
+							});
+
+						});
+					</script>
+					<label class="text text-primary" id="collect" style="width:100px;display:none;position: absolute; top: 50px;">收藏成功</label>
+				</li>
+
+			</ul>
+		</div>
+		<div class="row container-nav-tabs-2">
+			<ul class="nav nav-tabs-2">
+				<li class="active"><a href="#introduction">企业介绍</a></li>
+				<li><a href="#requirement">职责&要求</a></li>
+
+			</ul>
+		</div>
+		<div id="introduction"><h4>企业介绍</h4>
+
+			<p class="fat-line">{$company.description}</p>
+			<hr/>
+		</div>
+		<div id="requirement"><h4>职责&要求</h4>
+
+			<p>岗位职责</p>
+
+			<p class="fat-line">
+				{$jobitem.duty}
+			</p><br/>
+
+			<p>任职要求</p>
+
+			<p class="fat-line">
+				{$jobitem.request}
+			</p>
+			<hr/>
+		</div>
+	</div>
+	<!--详情页右边-->
+	<div class="col-xs-3 col-2-right">
+		<div class="panel panel-simple">
+			<div class="panel-heading"><h4>企业信息</h4></div>
+			<div class="panel-body">
+				<style>
+					.wei-user-logo {
+						border: 1px solid #fff;
+					}
+				</style>
+				<p class="wei-user-logo wei-user-logo-large">
+					<a href="{:U('Home/Company/item?comid='.$company['id'])}"><img class="img-border" id="logo_img" src="__PUBLIC__{$company.logo}"></a>
+				</p>
+
+				<p><a class="text-primary" href="{:U('Home/Company/item?comid='.$company['id'])}">{$company.cname}</a></p>
+
+				<p><span class="text-label">&nbsp;
+                                    {$company.sizeid}&nbsp;
+                                    {$company.attrid}&nbsp;
+                                    {$company.industryid}</span></p>
+
+				<p><a class="text-primary" href="{$company.website}" target="_blank" rel="nofollow">{$company.website}</a></p>
+
+				<p><span class="text-label">{$company.address}</span></p>
+			</div>
+		</div>
+		<hr>
+
+	</div>
+</div>
+</div>
+<!--main end=============主体-->
+<!--footer start=============底部-->
+<include file="Public/footer"/>

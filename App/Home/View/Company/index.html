@@ -1,0 +1,149 @@
+﻿<include file="Home@Public/header"/>
+<!--main start=============主体-->
+<div class="container">
+	<div class="row">
+		<div class="col-md-9" role="main">
+			<div class="row job-section">
+				<div class="job-section-nav"><span>找到&nbsp;<span class="cOrange">{$count}</span>&nbsp;个相关企业</span></div>
+				<script type="text/javascript">
+					function Filter(a,b){
+						var $ = function(e){return document.getElementById(e);}
+						var ipts = $('filterForm').getElementsByTagName('input'),result=[];
+						for(var i=0,l=ipts.length;i<l;i++){
+							if(ipts[i].getAttribute('to')=='filter'){
+								result.push(ipts[i]);
+							}
+						}
+						if($(a)){
+							$(a).value = b;
+							for(var j=0,len=result.length;j<len;j++){
+								if(result[j].value==''){
+									result[j].parentNode.removeChild(result[j]);
+								}
+							}
+							document.forms['filterForm'].submit();
+						}
+						return false;
+					}
+				</script>
+				<form id="filterForm" action="{:U('Home/Company/index')}" method="GET">
+					<input to="filter" type="hidden" id="nowcid" name="nowcid" value="{$nowcid}" />
+					<input to="filter" type="hidden" id="industryid" name="industryid" value="{$industryid}" />
+					<input to="filter" type="hidden" id="sizeid" name="sizeid" value="{$sizeid}" />
+					<input to="filter" type="hidden" id="attrid" name="attrid" value="{$attrid}" />
+					<input to="filter" type="hidden" id="orderid" name="orderid" value="{$orderid}" />
+				</form>
+				<div class="job-section-body">
+					<!--分类搜索 start=============-->
+					<div class="job_search"><!-- 按城市搜索 -->
+						<dl class="page_sort">
+							<dt>城市</dt>
+							<dd <empty name="nowcid" >class='on'</empty>><a href="javascript:Filter('nowcid',0);">全部</a></dd>
+							<foreach name="citylist" item="v">
+								<dd <eq name="nowcid" value="$v.id">class='on'</eq>>
+								<a href="javascript:Filter('nowcid','{$v.id}');">{$v.name}</a></dd>
+							</foreach>
+						</dl>
+						<!-- 按行业搜索 -->
+						<dl class="page_sort">
+							<dt>行业</dt>
+							<dd <empty name="industryid" >class='on'</empty>><a href="javascript:Filter('industryid',0);">全部</a></dd>
+							<!-- 遍历输出所有行业标签 -->
+							<foreach name="trade" item="v">
+								<dd <eq name="industryid" value="$v.id">class='on'</eq>>
+								<a href="javascript:Filter('industryid','{$v.id}');">{$v.tagname}</a></dd>
+							</foreach>
+						</dl>
+						<!-- 按规模搜索 -->
+						<dl class="page_sort">
+							<dt>规模</dt>
+							<dd <empty name="sizeid" >class='on'</empty>><a href="javascript:Filter('sizeid',0);">全部</a></dd>
+							<foreach name="size" item="v">
+								<dd <eq name="sizeid" value="$v.id">class='on'</eq>>
+									<a href="javascript:Filter('sizeid','{$v.id}');" >{$v.tagname}</a></dd>
+							</foreach>
+						</dl>
+						<!-- 按性质搜索 -->
+						<dl class="page_sort">
+							<dt>性质</dt>
+							<dd <empty name="attrid" >class='on'</empty>><a href="javascript:Filter('attrid',0);">全部</a></dd>
+							<foreach name="attr" item="v">
+								<dd <eq name="attrid" value="$v.id">class='on'</eq>>
+									<a href="javascript:Filter('attrid','{$v.id}');" >{$v.tagname}</a></dd>
+							</foreach>
+						</dl>
+					</div>
+					<!--分类搜索 end=============-->
+					<div class="sortbar"><span class="right">共&nbsp;<span class="cOrange">{$count}</span>&nbsp;个靠谱企业</span>
+						<ul class="sortbar_btns">
+							<li>
+							<a href="javascript:Filter('orderid','id_desc');">
+								最新<span class="ico_sortbar_btns
+					<eq name='orderid' value='id_desc'>ico_sortbar_btns_btm2<else/>ico_sortbar_btns_btm1</eq>"></span></a></li>
+							<li>
+								<a href="javascript:Filter('orderid','level_desc');">
+									热门<span class="ico_sortbar_btns
+					<eq name='orderid' value='level_desc'>ico_sortbar_btns_btm2<else/>ico_sortbar_btns_btm1</eq>"></span></a></li>
+							<li>
+								<a href="javascript:Filter('orderid','sizeid_desc');">规模
+					<span class="ico_sortbar_btns
+					<eq name='orderid' value='sizeid_desc'>ico_sortbar_btns_btm2<else/>ico_sortbar_btns_btm1</eq>""></span></a></li>
+						</ul>
+					</div>
+					<style>
+						.wei-user-list .wei-user-logo img {
+							width: 88px;
+							height: 88px;
+						}
+					</style>
+					<ul class="wei-user-list">
+						<foreach name="company" item="vo">
+							<li style="position: relative;">
+								<div class="wei-user-logo left">
+									<a href="{:U('Company/item')}?comid={$vo.id}" target="_blank" title="{$vo.cname}">
+										<img src="__PUBLIC__{$vo.logo}" alt="{$vo.cname}Logo"/>
+									</a>
+								</div>
+								<p style="font-size: 14px;margin-bottom: 3px;"><a href="{:U('Company/item')}?comid={$vo.id}" target="_blank" title="NASDAQ:JRJC">{$vo.cname}</a></p>
+
+								<p class="text-muted" style="margin-bottom: 3px; color:#999999;">
+									<span>{$vo.one}</span>
+								</p>
+
+								<p class="text-muted" style="margin-bottom: 3px;color:#999999;">
+									<span>所在城市：{$vo.nowcid}</span>
+									<span style="">公司性质：{$vo.attrid}</span>
+									<span>公司规模：{$vo.sizeid}</span>
+									<span>所在行业：{$vo.industryid}</span>
+								</p>
+
+								<p style="margin-bottom: 3px;">
+									<foreach name="vo.job" item="j">
+										<span>
+											<a href="{:U('Job/item')}?jobid={$j.id}" target="_blank">{$j.name}</a>
+										</span>
+									</foreach>
+								</p>
+							</li>
+						</foreach>
+					</ul>
+					<empty name="company">
+						<div class="empty_search_tip" style="text-align: center">
+							<img src="__PUBLIC__/images/no_job.png"><span>暂时没找到相关企业</span></div>
+					</empty>
+					<!--分页 start-->
+					<div class="pages">{$page}</div>
+					<!--分页 end-->
+				</div>
+				<!--分类搜索 end=============-->
+			</div>
+		</div>
+		<div class="col-md-3">
+			<!--热门企业 start-->
+			{:W('Common/Public/hotcompany')}
+			<!--热门企业 end-->
+		</div>
+	</div>
+</div>
+<!--main end=============主体-->
+<include file="Home@Public/footer"/>

@@ -1,0 +1,89 @@
+﻿<include file="Public/header"/>
+<include file="Public/menu"/>
+
+<div class="page-content">
+	<div class="page-header">
+		<h1>
+			角色管理
+			<small>
+				<i class="icon-double-angle-right"></i>
+				<eq name="Think.ACTION_NAME" value="edit">修改角色<else/>添加角色</eq>
+			</small>
+		</h1>
+	</div>
+	<!-- /.page-header -->
+	<!-- PAGE CONTENT BEGINS -->
+	<div class="row">
+		<div class="col-xs-12">
+			<div class="row">
+				<div class="tabbable">
+					<ul class="nav nav-tabs" id="myTab">
+						<li>
+							<a href="{:U('Role/index')}">
+								<i class="green icon-home bigger-110"></i>
+								角色列表
+							</a>
+						</li>
+						<li class="active">
+							<a>
+								<i class="green icon-edit bigger-110"></i>
+								<eq name="Think.ACTION_NAME" value="edit">修改角色<else/>添加角色</eq>
+							</a>
+						</li>
+					</ul>
+					<div class="tab-content">
+						<div class="row">
+							<div class="col-xs-4">
+								<form class="form-horizontal" id="ajaxForm" action='<eq name="Think.ACTION_NAME" value="edit">{:U("Role/update")}<else/>{:U("Role/insert")}</eq>' method="post">
+									<input type="hidden" name="id" value="{$data.id}"/>
+									<div class="space-10"></div>
+									<div class="form-group">
+										<label class="col-sm-3 control-label"> 角色名 </label>
+										<div class="col-sm-9">
+											<input type="text"  name="name" value="{$data.name}" placeholder="英文名称"/>
+										</div>
+									</div>
+									<div class="form-group">
+										<label class="col-sm-3 control-label"> 角色昵称 </label>
+										<div class="col-sm-9">
+											<input type="text"  name="remark" value="{$data.remark}" placeholder="中文名称"/>
+										</div>
+									</div>
+									<div class="form-group">
+										<label class="col-sm-3 control-label no-padding-right" > 状态</label>
+										<div class="col-sm-6">
+											<input type="radio" name="status" class="ace"
+											<eq name="data.status" value="1">checked<else/></eq>
+											<eq name="data.status" value="">checked<else/></eq> value="1"/>
+											<span class="lbl"> 启用 </span>
+											<input  type="radio" name="status" class="ace"
+											<eq name="data.status" value="2">checked<else/></eq> value="2"/>
+
+											<span class="lbl"> 禁用 </span>
+										</div>
+									</div>
+									<hr/>
+									<div class="center">
+										<button class="btn btn-info " type="submit">
+											<i class="icon-ok bigger-110"></i>
+											提交
+										</button>
+									</div>
+								</form>
+							</div>
+						</div>
+
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- PAGE CONTENT END -->
+</div>
+</div>
+</div>
+<!-- inline scripts related to this page -->
+<script type="text/javascript">
+</script>
+<include file="Public/footer"/>
+

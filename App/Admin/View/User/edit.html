@@ -1,0 +1,118 @@
+﻿<include file="Public/header"/>
+<include file="Public/menu"/>
+<div class="page-content">
+	<div class="page-header">
+		<h1>
+			用户管理
+			<small>
+				<i class="icon-double-angle-right"></i>
+				<eq name="Think.ACTION_NAME" value="edit">修改用户信息<else/>添加用户信息</eq>
+			</small>
+		</h1>
+	</div>
+	<!-- /.page-header -->
+	<!-- PAGE CONTENT BEGINS -->
+	<div class="row">
+		<div class="col-xs-12">
+			<div class="row">
+				<div class="tabbable">
+					<ul class="nav nav-tabs" id="myTab">
+						<li>
+							<a href="{:U('User/index')}">
+								<i class="green icon-home bigger-110"></i>
+								用户列表
+							</a>
+						</li>
+						<li class="active">
+							<a >
+								<i class="green icon-edit bigger-110"></i>
+								<eq name="Think.ACTION_NAME" value="edit">修改用户信息<else/>添加用户信息</eq>
+							</a>
+						</li>
+					</ul>
+					<div class="tab-content">
+						<div class="tab-pane in active">
+							<form  id="ajaxForm" class="form-horizontal" action='
+							<eq name="Think.ACTION_NAME" value="edit">{:U("User/update")}<else/>{:U("User/insert")}</eq>' method="post" enctype="multipart/form-data">
+								<input type="hidden" name="id" value="{$data.id}"/>
+								<div class="form-group">
+									<label class="col-sm-3 control-label no-padding-right">用户类型</label>
+									<div class="col-sm-2">
+										<select class=" width-80 form-control" name="usertype">
+											<option value="">全部分类</option>
+											<option value="1" {$data['usertype']==1?"selected":""}>个人用户</option>
+											<option value="2" {$data['usertype']==2?"selected":""}>企业用户</option>
+										</select>
+									</div>
+								</div>
+
+								<div class="space-4"></div>
+
+								<div class="form-group">
+									<label class="col-sm-3 control-label no-padding-right" > 账号 </label>
+									<div class="col-sm-9">
+										<input type="text"  name="username" placeholder="请输入账号" class="col-xs-10 col-sm-5" value="{$data.username}"/>
+									</div>
+								</div>
+
+								<div class="form-group">
+									<label class="col-sm-3 control-label no-padding-right" > 用户昵称 </label>
+									<div class="col-sm-9">
+										<input type="text"  name="alias" class="col-xs-10 col-sm-5" value="{$data.alias}"/>
+									</div>
+								</div>
+								<div class="form-group">
+									<label class="col-sm-3 control-label no-padding-right" > email </label>
+									<div class="col-sm-9">
+										<input type="text"  name="email" class="col-xs-10 col-sm-5" value="{$data.email}"/>
+									</div>
+								</div>
+								<div class="form-group">
+									<label class="col-sm-3 control-label no-padding-right" > 电话/手机 </label>
+									<div class="col-sm-9">
+										<input type="text"  name="phone" class="col-xs-10 col-sm-5" value="{$data.phone}"/>
+									</div>
+								</div>
+								<div class="form-group">
+									<label class="col-sm-3 control-label no-padding-right" > 上传头像 </label>
+									<div class="col-sm-9">
+										<input type="file"  name="photo" class="col-xs-10 col-sm-5"/>
+									</div>
+								</div>
+								<div class="form-group">
+									<label class="col-sm-3 control-label no-padding-right" > 状态</label>
+									<div class="col-sm-2">
+										<input type="radio" name="status" class="ace"
+										    <eq name="data.status" value="1">checked<else/></eq>
+											<eq name="data.status" value="">checked<else/></eq> value="1"/>
+										<span class="lbl"> 正常 </span>
+										<input  type="radio" name="status" class="ace"
+										<eq name="data.status" value="2">checked<else/></eq> value="2"/>
+										<span class="lbl"> 禁用 </span>
+									</div>
+								</div>
+
+								<div class="space-4"></div>
+
+								<div class="clearfix form-actions">
+									<div class="col-md-offset-3 col-md-9">
+										<button class="btn btn-info" type="submit">
+											<i class="icon-ok bigger-110"></i>
+											提交
+										</button>
+									</div>
+								</div>
+							</form>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- PAGE CONTENT END -->
+</div>
+</div>
+</div>
+
+<include file="Public/footer"/>
+

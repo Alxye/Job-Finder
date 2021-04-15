@@ -1,0 +1,167 @@
+﻿<include file="Public/header"/>
+<include file="Public/menu"/>
+<div class="page-content">
+	<div class="page-header">
+		<h1>
+			职位管理
+			<small>
+				<i class="icon-double-angle-right"></i>
+				职位列表
+			</small>
+		</h1>
+	</div>
+	<!-- /.page-header -->
+	<!-- PAGE CONTENT BEGINS -->
+	<div class="row">
+		<div class="col-xs-12">
+			<div class="row">
+				<div class="tabbable">
+					<ul class="nav nav-tabs" id="myTab">
+						<li class="active">
+							<a  href="{:U('Job/index')}">
+								<i class="green icon-home bigger-110"></i>
+								职位列表
+							</a>
+						</li>
+					</ul>
+					<div class="tab-content">
+						<div  class="tab-pane in active">
+							<div class="table-responsive">
+								<table id="sample-table" class="table table-striped table-bordered table-hover">
+									<thead>
+									<tr>
+										<th class="center">ID</th>
+										<th>企业</th>
+										<th>职位名称</th>
+										<th>月薪</th>
+										<th>招聘人数</th>
+										<th>要求学历</th>
+										<th>工作年限</th>
+										<th>状态</th>
+										<th>修改时间</th>
+										<th>操作</th>
+									</tr>
+									</thead>
+								</table>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- PAGE CONTENT END -->
+</div>
+</div>
+</div>
+
+<script type="text/javascript">
+	seajs.use(['admin-common','$','dataTables',"dataTables-bootstrap",'bootbox'],function(admin,$){
+		var oTable = $('#sample-table').dataTable({
+			"aaSorting" : [[0, "desc"]], //默认的排序方式，第1列，降序排列
+			"bAutoWidth" : false,//是否自适应宽度
+			"aLengthMenu" : [[10, 25, 50, 100], [10, 25, 50, 100]],//每页显示数据量
+			"aoColumns" : [ //列操作
+				{"sClass" : "center", "mData" : "id"},
+				{"mData" : "company",bSortable:false,"sWidth" : "21%"},
+				{"mData" : "name",bSortable:false,"sWidth" : "21%"},
+				{"mData" : "payid","sClass" : "center","sWidth" : "8%"},
+				{"mData" : "num","sWidth" : "8%","sClass" : "center",
+					"mRender" : function (data) {
+						return data+'人';
+					}
+				},
+				{"mData" : "eid",bSortable:false,"sClass" : "center","sWidth" : "8%"},
+				{"mData" : "year",bSortable:false,"sClass" : "center","sWidth" : "8%"},
+				{"mData" : "status","sClass" : "center",//输出状态
+					"mRender" : function (data) {
+						if ( data == 1 ) {
+							res = "<span class='label label-sm label-success arrowed arrowed-righ'>";
+							res += "开启</span>"
+						} else {
+							res = "<span class='label label-sm label-Default arrowed arrowed-righ'>";
+							res += "关闭</span>"
+						}
+						return res;
+					}
+				},
+				{
+                    "mData" : "edittime",//修改时间
+					"sWidth" : "8%",
+					"sClass" : "center",
+                    "mRender" : function (data) {
+                        if(data>0) {
+                            return admin.format(data * 1000, "yyyy-MM-dd");
+                        }else{
+                            return "无";
+                        }
+                    }
+                },
+				{
+					bSortable:false,
+					"sWidth" : "7%",
+					"sClass" : "center",
+					"mData" : "id",
+					"mRender" : function (data) {
+						var editurl = "{:U('Job/edit')}?id=" + data;
+						var delturl = "{:U('Job/delete')}?id=" + data;
+
+						var res = "<div class='visible-md visible-lg hidden-sm hidden-xs action-buttons'>";
+						res += '<a class="green" href="' + editurl + '" title="修改">';
+						res += '<i class="icon-pencil bigger-130"></i></a>';
+						res += "<a class='red del'  href='" + delturl + "'";
+						res += 'title="删除"> ';
+						res += '<i class="icon-trash bigger-130"></i></a></div>';
+						return res;
+					}
+				}
+			],
+			//与服务器端传输数据
+			"bServerSide" : true,//服务端处理分页
+			"sAjaxSource" : "{:U('Job/lists')}",
+			"sServerMethod" : "POST",
+			//"bProcessing": true,
+
+			//多语言配置
+			"oLanguage" : {
+				"sProcessing" : "正在加载中......",
+				"sLengthMenu" : "每页显示 _MENU_ 条记录",
+				"sZeroRecords" : "对不起，查询不到相关数据！",
+				"sEmptyTable" : "表中无数据存在！",
+				"sInfo" : "当前显示 _START_ 到 _END_ 条，共 _TOTAL_ 条记录",
+				"sInfoFiltered" : "数据表中共为 _MAX_ 条记录",
+				"sSearch" : "搜索",
+				"oPaginate" : {
+					"sFirst" : "首页",
+					"sPrevious" : "上一页",
+					"sNext" : "下一页",
+					"sLast" : "末页"
+				}
+			}
+		});
+		//删除信息事件
+		$(document).on('click', 'a.del', function () {
+			var ob = $(this);
+			if ( confirm("确定要删除该信息吗？") ) {
+				$.ajax({
+					url : ob.attr("href"),
+					success : function (data) {
+						if ( data.status > 0 ) {
+							bootbox.alert(data.info, function () {
+								oTable.fnDraw();
+							});
+						} else {
+							bootbox.alert({
+								message : data.info,
+								title : "提示信息"
+							});
+							return false;
+						}
+					}
+				})
+			}
+			return false;
+		})
+	});
+</script>
+<include file="Public/footer"/>

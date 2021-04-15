@@ -1,0 +1,183 @@
+﻿<include file="Home@Public/header"/>
+<style>
+	.text-muted {
+		color: #999;
+	}
+</style>
+<!--main start=============主体-->
+<div class="container">
+<div class="row">
+<div class="col-md-9" role="main">
+<div class="row job-section">
+<div class="job-section-nav"><span>找到&nbsp;<span class="cOrange">{$count}</span>&nbsp;个相关职位</span></div>
+<div class="job-section-body">
+	<div class="job_search">
+		<script type="text/javascript">
+			function Filter(a,b){
+				var $ = function(e){return document.getElementById(e);}
+				var ipts = $('filterForm').getElementsByTagName('input'),result=[];
+				for(var i=0,l=ipts.length;i<l;i++){
+					if(ipts[i].getAttribute('to')=='filter'){
+						result.push(ipts[i]);
+					}
+				}
+				if($(a)){
+					$(a).value = b;
+					for(var j=0,len=result.length;j<len;j++){
+						if(result[j].value==''){
+							result[j].parentNode.removeChild(result[j]);
+						}
+					}
+					document.forms['filterForm'].submit();
+				}
+				return false;
+			}
+		</script>
+		<form id="filterForm" action="{:U('Home/Job/index')}" method="GET">
+			<input to="filter" type="hidden" id="cityid" name="cityid" value="{$cityid}" />
+			<input to="filter" type="hidden" id="industryid" name="industryid" value="{$industryid}" />
+			<input to="filter" type="hidden" id="cid" name="cid" value="{$cid}" />
+			<input to="filter" type="hidden" id="cid2" name="cid2" value="{$cid2}" />
+			<input to="filter" type="hidden" id="payid" name="payid" value="{$payid}" />
+			<input to="filter" type="hidden" id="eid" name="eid" value="{$eid}" />
+			<input to="filter" type="hidden" id="year" name="year" value="{$year}" />
+			<input to="filter" type="hidden" id="orderid" name="orderid" value="{$orderid}" />
+		</form>
+		<dl class="page_sort">
+			<dt>城市</dt>
+			<dd <empty name="cityid" >class='on'</empty>><a href="javascript:Filter('cityid',0);">全部</a></dd>
+			<foreach name="citylist" item="v">
+				<dd <eq name="cityid" value="$v.id">class='on'</eq>>
+					<a href="javascript:Filter('cityid','{$v.id}');">{$v.name}</a></dd>
+			</foreach>
+		</dl>
+		<!-- 按行业搜索 -->
+		<dl class="page_sort">
+			<dt>行业</dt>
+			<dd <empty name="industryid" >class='on'</empty>><a href="javascript:Filter('industryid',0);">全部</a></dd>
+			<!-- 遍历输出所有行业标签 -->
+			<foreach name="trade" item="v">
+				<dd <eq name="industryid" value="$v.id">class='on'</eq>>
+						<a href="javascript:Filter('industryid','{$v.id}');">{$v.tagname}</a></dd>
+			</foreach>
+		</dl>
+		<!-- 按一级职能分类搜索 -->
+		<dl class="page_sort">
+			<dt>职能</dt>
+			<dd <empty name="cid" >class='on'</empty>><a href="javascript:Filter('cid',0);">全部</a></dd>
+			<foreach name="category" item="v">
+				<dd <eq name="cid" value="$v.id">class='on'</eq>>
+					<a href="javascript:Filter('cid','{$v.id}');" >{$v.name}</a></dd>
+			</foreach>
+		</dl>
+		<!-- 按二级、三级职能分类搜索 -->
+		<dl class="page_sort_sub" >
+		<foreach name="category_2" item="v">
+				<dt <eq name="cid2" value="$v.id">class='on'</eq>>
+			<a href="javascript:Filter('cid2','{$v.id}');">{$v.name}</a>
+				</dt>
+		</foreach>
+		</dl>
+		<!-- 按薪资搜索 -->
+		<dl class="page_sort">
+			<dt>薪水</dt>
+			<dd <empty name="payid" >class='on'</empty>><a href="javascript:Filter('payid',0);">全部</a></dd>
+			<foreach name="pay" item="v" key="k">
+				<dd <eq name="payid" value="$k">class='on'</eq>>
+				<a href="javascript:Filter('payid','{$k}');" >{$v}</a></dd>
+			</foreach>
+		</dl>
+		<!-- 按学历搜索 -->
+		<dl class="page_sort">
+			<dt>学历</dt>
+			<dd <empty name="eid" >class='on'</empty>><a href="javascript:Filter('eid',0);">全部</a></dd>
+			<foreach name="eidlist" item="v">
+				<dd <eq name="eid" value="$v.id">class='on'</eq>>
+				<a href="javascript:Filter('eid','{$v.id}');">{$v.tagname}</a></dd>
+			</foreach>
+		</dl>
+		<!-- 按经验搜索 -->
+		<dl class="page_sort">
+			<dt>经验</dt>
+			<dd <empty name="year" >class='on'</empty>><a href="javascript:Filter('year',0);">全部</a></dd>
+			<foreach name="experience" item="v" key="k">
+				<dd <eq name="year" value="$k">class='on'</eq>>
+				<a href="javascript:Filter('year','{$k}');" >{$v}</a></dd>
+			</foreach>
+		</dl>
+	</div>
+	<div class="sortbar"><span class="right">共&nbsp;<span class="cOrange">{$count}</span>&nbsp;个靠谱职位</span>
+		<ul class="sortbar_btns">
+			<li>
+				<a href="javascript:Filter('orderid','edittime_desc');">
+					最新<span class="ico_sortbar_btns
+					<eq name='orderid' value='edittime_desc'>ico_sortbar_btns_btm2<else/>ico_sortbar_btns_btm1</eq>"></span></a></li>
+			<li>
+				<a href="javascript:Filter('orderid','hits_desc');">
+					热门<span class="ico_sortbar_btns
+					<eq name='orderid' value='hits_desc'>ico_sortbar_btns_btm2<else/>ico_sortbar_btns_btm1</eq>"></span></a></li>
+			<li>
+				<a href="javascript:Filter('orderid','payid_desc');">薪水
+					<span class="ico_sortbar_btns
+					<eq name='orderid' value='payid_desc'>ico_sortbar_btns_btm2<else/>ico_sortbar_btns_btm1</eq>""></span></a></li>
+		</ul>
+	</div>
+	<ul class="job-list">
+		<!-- 遍历输出职位 -->
+		<volist name="joblist" id="vo">
+			<li>
+				<div class="right">
+					<a href="{:U('Job/item')}?jobid={$vo.id}#comment_list" target="_blank">
+						<span class="ico ico_comment"></span>{$vo.flushnum}</a>
+					<strong>￥{$vo.payid}</strong>
+				</div>
+				<style>
+					.wei-user-logo img {
+						width: 43px;
+						height: 43px;
+					}
+				</style>
+				<div class="wei-user-logo wei-job-logo left ">
+					<a href="{:U('Company/item')}?companyid={$vo.comid}" target="_blank" title="">
+						<img src="__PUBLIC__{$vo.logo}" alt="Logo"/>
+					</a>
+				</div>
+				<div class="job-title">
+					<span class="text-muted small">
+						[<a href="{:U('Job/item')}?jobid={$vo.id}">{$vo.name}</a>]
+					</span>
+					<a href="{:U('Job/item')}?jobid={$vo.id}" target="_blank" title="{$vo.title}">
+						{$vo.title}
+					</a>
+				</div>
+				<p>
+					<span><a class="muted" href="{:U('Company/item')}?comid={$vo.comid}')" target="_blank" title="{$vo.comname}">{$vo.comname}</a></span>
+					<span class="text-muted">{$vo.cityname}</span>
+					<span class="text-muted">更新于：{:tranTime($vo['edittime'])}</span>
+					<span class="text-muted">{$vo.year}工作经验</span>
+					<span class="text-muted">{$vo.eid}</span>
+				</p>
+			</li>
+		</volist>
+	</ul>
+	<br/>
+	<empty name="joblist">
+		<div class="empty_search_tip" style="text-align: center">
+			<img src="__PUBLIC__/images/no_job.png"><span>暂无相关职位</span></div>
+	</empty>
+	<!--分页 start-->
+	<div class="pages">{$page}</div>
+	<!--分页 end-->
+</div>
+</div>
+</div>
+<div class="col-md-3">
+	<!--热门企业 start-->
+	{:W('Common/Public/hotcompany')}
+	<!--热门企业 end-->
+
+</div>
+</div>
+</div>
+<!--main end=============主体-->
+<include file="Home@Public/footer"/>

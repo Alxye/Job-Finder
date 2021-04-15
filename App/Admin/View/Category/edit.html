@@ -1,0 +1,116 @@
+﻿<include file="Public/header"/>
+<include file="Public/menu"/>
+<style type="text/css">
+	select.cate {font-size: 14px}
+</style>
+<div class="page-content">
+	<div class="page-header">
+		<h1>
+			分类
+			<small>
+				<i class="icon-double-angle-right"></i>
+				<eq name="Think.ACTION_NAME" value="edit">修改分类
+					<else/>
+					添加分类
+				</eq>
+			</small>
+		</h1>
+	</div>
+	<!-- /.page-header -->
+	<!-- PAGE CONTENT BEGINS -->
+	<div class="row">
+		<div class="col-xs-12">
+			<div class="row">
+				<div class="tabbable">
+					<ul class="nav nav-tabs" id="myTab">
+						<li>
+							<a href="{:U('Category/index')}">
+								<i class="green icon-home bigger-110"></i>
+								浏览分类
+							</a>
+						</li>
+						<li class="active">
+							<a>
+								<i class="green icon-edit bigger-110"></i>
+								<eq name="Think.ACTION_NAME" value="edit">修改分类
+									<else/>
+									添加分类
+								</eq>
+							</a>
+						</li>
+					</ul>
+					<div class="tab-content">
+						<div class="row">
+							<div class="col-xs-4">
+								<form class="form-horizontal" id="ajaxForm" action='<eq name="Think.ACTION_NAME" value="edit">{:U("Category/update")}<else/>{:U("Category/insert")}</eq>' method="post">
+									<input type="hidden" name="id" value="{$item.id}"/>
+									<hr/>
+									<div class="form-group">
+										<label class="col-sm-3 control-label" >所属模块</label>
+
+										<div class="col-sm-9">
+											<select class=" width-90 form-control cate" name="module" {$moduleDisabled} >
+											<option value="">选择模块</option>
+											<foreach name="module" item="v">
+												<option value="{$v.id}" <eq name="item.module" value="$v.id">selected</eq>>{$v.tagname}</option>
+											</foreach>
+											</select>
+										</div>
+									</div>
+									<div class="form-group">
+										<label class="col-sm-3 control-label" >上级分类</label>
+
+										<div class="col-sm-9">
+											<select id="cate" class=" width-90 form-control cate" name="pid" {$disabled} >
+												<option value="0">作为主分类</option>
+												<foreach name="list" item="v">
+													<option value="{$v.id}" {$v.selected}>{$v.name}</option>
+												</foreach>
+											</select>
+											<script>
+												seajs.use(["$"],function($){
+													$(document).on('change',"select#cate",function(){
+														$
+													});
+												})
+											</script>
+										</div>
+									</div>
+									<div class="space-10"></div>
+									<div class="form-group">
+										<label class="col-sm-3 control-label"> 分类名称 </label>
+										<div class="col-sm-9">
+											<input type="text"  name="name" value="{$item.name}"/>
+										</div>
+									</div>
+									<div class="form-group">
+										<label class="col-sm-3 control-label"> 排序 </label>
+										<div class="col-sm-9">
+											<input type="text"  name="sort" value="{$item.sort}"  class="col-xs-3"/>
+										</div>
+									</div>
+									<hr/>
+									<div class="center">
+										<button class="btn btn-info " type="submit">
+											<i class="icon-ok bigger-110"></i>
+											提交
+										</button>
+									</div>
+								</form>
+							</div>
+						</div>
+
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- PAGE CONTENT END -->
+</div>
+</div>
+</div>
+<!-- inline scripts related to this page -->
+<script type="text/javascript">
+</script>
+<include file="Public/footer"/>
+

@@ -1,0 +1,53 @@
+<include file="Public/header"/>
+<link rel="stylesheet" type="text/css" href="__PUBLIC__/Css/Common/index_aio.min.css">
+
+<!--main start=============主体-->
+<div class="container-fluid container-fluid-discovery">
+	<div class="container" style="margin-top:0px;">
+		<div class="row">
+			<div class="col-2-left">
+                <span ><img src="__PUBLIC__/images/faxian.png" width="30" height="45"/></span>
+                <span class="discovery-slogan">
+                <span>发现</span>
+                <span class="text-label">&nbsp;•&nbsp;最优质的音乐公司</span></span>
+            </div>
+		</div>
+	</div>
+</div>
+<div class="container">
+	<div class="row">
+		<div class="col-xs-9 col-2-left">
+			<ul class="discovery-list">
+				<volist name="list" id="vo">
+				<li class="discovery-list-item"><h3><a href="__URL__/info/id/{$vo.id}">{$vo.title}</a></h3>
+					<p class="text-label pull-group">
+                    <span class="pull-right">查看次数：&nbsp;{$vo.hits}</span>
+                    <span class="pull-right" style="margin-right:50px;">{$vo.addtime|date="Y-m-d",###}</span>
+                    </p>
+
+					<p>
+						<a href="__URL__/info/id/{$vo.id}"><img src="__PUBLIC__{$vo.thumb}"/></a></p>
+
+					<p style="text-align:left;">{$vo.introduce}&nbsp;<a class="text-primary" href="__URL__/info/id/{$vo.id}">阅读全文</a></p>
+                </li>
+				</volist>
+			</ul>
+			<div class="pages">
+				{$show}
+			</div>
+		</div>
+
+		<div class="col-xs-3 col-2-right">
+			<ul class="list-unstyled discovery-category-list" data-spy="affix" data-offset-top="120" id="changestyle">
+				<li><a class="<eq name='Think.get.cid' value=''>text-primary<else />text-label</eq>" style="text-align:left;" href="{:U('News/index')}">全部分类</a></li>
+				<li><a class="<eq name='Think.get.cid' value='19'>text-primary<else />text-label</eq>" style="text-align:left;" href="{:U('Home/News/index?cid=19')}">互联网</a></li>
+				<li><a class="<eq name='Think.get.cid' value='20'>text-primary<else />text-label</eq>" style="text-align:left;" href="{:U('Home/News/index?cid=20')}">移动互联网</a></li>
+				<li><a class="<eq name='Think.get.cid' value='21'>text-primary<else />text-label</eq>" style="text-align:left;" href="{:U('Home/News/index?cid=21')}">新媒体</a></li>
+				<li><a class="<eq name='Think.get.cid' value='22'>text-primary<else />text-label</eq>" style="text-align:left;" href="{:U('Home/News/index?cid=22')}">金融</a></li>
+			</ul>
+		</div>
+	</div>
+</div>
+<!--main end=============主体-->
+<!--footer start=============底部-->
+<include file="Public/footer"/>

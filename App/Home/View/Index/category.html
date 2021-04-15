@@ -1,0 +1,29 @@
+<!--职位分类-->
+
+<ul class="category-list" style="float: left;margin-right: 10px;border-top: 1px solid #000000;">
+	<foreach name="cate" item="v">
+		<li class="category-list-item"><h4 class="category-title"><a href="{:U('Home/Job/index?cid='.$v['id'])}" >{$v.name}</a></h4>
+			<ul class="category-title-list">
+				<foreach name="v.spe" item="s">
+				<li><a class="text-label" href="{:U('Home/Job/index','cid='.$v['id'].'&cid2='.$s['id'])}" >{$s.name}</a></li>
+				</foreach>
+			</ul>
+			<div class="right-indicator"><i class="text-muted fa fa-angle-right"></i></div>
+			<notempty name="v.children">
+			<ul class="sub-category-list">
+				<foreach name="v.children" item="j">
+				<li class="sub-category-list-item"><h4 class="category-title"><a href="{:U('Home/Job/index','cid='.$v['id'].'&cid2='.$j['id'])}">{$j.name}</a></h4>
+					<ul class="category-title-list">
+						<foreach name="j.children" item="x">
+						<li><a class="text-label" href="{:U('Home/Job/index','cid='.$v['id'].'&cid2='.$x['id'])}" >{$x.name}</a></li>
+						</foreach>
+					</ul>
+				</li>
+				</foreach>
+			</ul>
+				<div class="mask"></div>
+			</notempty>
+
+		</li>
+	</foreach>
+</ul>

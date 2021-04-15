@@ -1,0 +1,7 @@
+/**1024**/
+@media screen   and   (min-width:0px)  and (max-width:1024px) {
+	.job-category-widget .category-list{
+		margin-left: 2px;
+		width:200px;
+	}
+}

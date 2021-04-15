@@ -1,0 +1,357 @@
+<div class="main-container" id="main-container">
+<script type="text/javascript">
+	seajs.use(["ace-extra"], function (ace) {
+		try {
+			ace.settings.check('main-container', 'fixed')
+		} catch (e) {
+		}
+	})
+</script>
+
+<div class="main-container-inner">
+<a class="menu-toggler" id="menu-toggler" href="#">
+	<span class="menu-text"></span>
+</a>
+
+<div class="sidebar" id="sidebar">
+<script type="text/javascript">
+	seajs.use(["ace-extra"], function (ace) {
+		try {
+			ace.settings.check('sidebar', 'fixed')
+		} catch (e) {
+		}
+	})
+</script>
+<div class="sidebar-shortcuts" id="sidebar-shortcuts">
+	<div class="sidebar-shortcuts-large" id="sidebar-shortcuts-large">
+		<button class="btn btn-success statistics" title="统计信息">
+			<i class="icon-signal"></i>
+		</button>
+
+		<button class="btn btn-info change" title="修改网站信息">
+			<i class="icon-pencil"></i>
+		</button>
+
+		<button class="btn btn-warning home"  title="前台首页">
+			<i class="icon-home"></i>
+		</button>
+
+		<button class="btn btn-danger clear" title="清空缓存">
+			<i class="icon-cog"></i>
+
+		</button>
+	</div>
+
+	<div class="sidebar-shortcuts-mini" id="sidebar-shortcuts-mini">
+		<span class="btn btn-success"></span>
+
+		<span class="btn btn-info"></span>
+
+		<span class="btn btn-warning"></span>
+
+		<span class="btn btn-danger"></span>
+	</div>
+	<script>
+		seajs.use(['$'],function($){
+			$('button.home').click(function(){
+				window.open("{:U('Home/Index/index')}");
+			})
+			$('button.clear').click(function(){
+				$.ajax({
+					url : "{:U('Setting/clearCache')}",
+					success : function (data) {
+						if ( data.status > 0 ) {
+							bootbox.alert(data.info, function () {
+
+							});
+						} else {
+							bootbox.alert({
+								message : data.info,
+								title : "提示信息"
+							});
+							return false;
+						}
+					}
+				})
+			})
+			$('button.statistics').click(function(){
+
+				$.ajax({
+					url : "{:U('Index/Index')}",
+					success : function (data) {
+						window.location.href =  "{:U('Index/Index')}";
+					}
+				})
+			})
+
+			$('button.change').click(function() {
+				$.ajax({
+					url: "{:U('Setting/Edit')}",
+					success: function (data) {
+						window.location.href =  "{:U('Setting/Edit')}";
+					}
+				})
+			})
+		})
+	</script>
+</div>
+<!-- #sidebar-shortcuts -->
+<span id="dataphp"
+      data-controller="{$Think.const.CONTROLLER_NAME}"
+      data-action="{$Think.const.ACTION_NAME}"></span>
+
+<ul class="nav nav-list">               
+<li>
+	<a href="#" class="dropdown-toggle">
+		<i class="icon-cog"></i>
+		<span class="menu-text"> 设置 </span>
+		<b class="arrow icon-angle-down"></b>
+	</a>
+	<ul class="submenu" id="setting">
+		<li class="edit">
+			<a href="{:U('Setting/edit')}" >
+				<i class="icon-double-angle-right"></i>
+				网站信息
+			</a>
+		</li>
+		<li class="inbox">
+			<a href="{:U('setting/inbox')}" >
+				<i class="icon-double-angle-right"></i>
+				修改密码
+			</a>
+		</li>
+	</ul>
+</li>
+<li id="userman">
+	<a href="#" class="dropdown-toggle">
+		<i class="icon-group"></i>
+		<span class="menu-text"> 用户管理</span>
+
+		<b class="arrow icon-angle-down"></b>
+	</a>
+	<ul class="submenu">
+
+		<li>
+			<a href="javascript:void(0)" class="dropdown-toggle">
+				<i class="icon-double-angle-right"></i>
+				用户组
+				<b class="arrow icon-angle-down"></b>
+			</a>
+			<ul class="submenu" id="user">
+				<li class="index">
+					<a href="{:U('User/index')}">
+						<i class="icon-leaf"></i>
+						用户列表
+					</a>
+				</li>
+				<li class="add">
+					<a href="{:U('User/add')}">
+						<i class="icon-leaf"></i>
+						添加用户
+					</a>
+				</li>
+			</ul>
+		</li>
+		<li>
+			<a href="javascript:void(0)" class="dropdown-toggle">
+				<i class="icon-double-angle-right"></i>
+				管理组
+				<b class="arrow icon-angle-down"></b>
+			</a>
+
+			<ul class="submenu">
+				<li class="admin">
+					<a href="{:U('Admin/index')}">
+						<i class="icon-leaf"></i>
+						用户管理
+					</a>
+				</li>
+				<li class="role">
+					<a href="{:U('Role/index')}">
+						<i class="icon-home"></i>
+						角色管理
+					</a>
+				</li>
+			</ul>
+		</li>
+	</ul>
+</li>
+<li id="catetag">
+	<a href="#" class="dropdown-toggle">
+		<i class="icon-list"></i>
+		<span class="menu-text"> 分类/标签</span>
+
+		<b class="arrow icon-angle-down"></b>
+	</a>
+	<ul class="submenu">
+		<li>
+			<a href="javascript:void(0)" class="dropdown-toggle">
+				<i class="icon-double-angle-right"></i>
+				分类管理
+				<b class="arrow icon-angle-down"></b>
+			</a>
+			<ul class="submenu" id="category">
+				<li class="index">
+					<a href="{:U('Category/index')}">
+						<i class="icon-leaf"></i>
+						浏览分类
+					</a>
+				</li>
+				<li class="add">
+					<a href="{:U('Category/add')}">
+						<i class="icon-leaf"></i>
+						添加分类
+					</a>
+				</li>
+			</ul>
+		</li>
+		<li>
+			<a href="javascript:void(0)" class="dropdown-toggle">
+				<i class="icon-double-angle-right"></i>
+				标签管理
+				<b class="arrow icon-angle-down"></b>
+			</a>
+			<ul class="submenu" id="tag">
+				<li class="index">
+					<a href="{:U('Tag/index')}">
+						<i class="icon-leaf"></i>
+						浏览标签
+					</a>
+				</li>
+				<li class="add">
+					<a href="{:U('Tag/add')}">
+						<i class="icon-leaf"></i>
+						添加标签
+					</a>
+				</li>
+			</ul>
+		</li>
+	</ul>
+</li>
+<li >
+	<a href="javascript:void(0)" class="dropdown-toggle">
+		<i class="icon-book"></i>
+		<span class="menu-text"> 职位管理</span>
+
+		<b class="arrow icon-angle-down"></b>
+	</a>
+	<ul class="submenu" id="job">
+		<li class="index edit">
+			<a href="{:U('Job/index')}" class="dropdown-toggle">
+				<i class="icon-double-angle-right"></i>
+				职位列表
+			</a>
+		</li>
+	</ul>
+</li>
+<li >
+	<a href="#" class="dropdown-toggle">
+		<i class="icon-inbox"></i>
+		<span class="menu-text"> 公司管理</span>
+
+		<b class="arrow icon-angle-down"></b>
+	</a>
+	<ul class="submenu" id="company">
+		<li class="index edit">
+			<a href="{:U('company/index')}" class="dropdown-toggle">
+				<i class="icon-double-angle-right"></i>
+				公司列表
+			</a>
+		</li>
+	</ul>
+</li>
+	
+<li>
+	<a href="#" class="dropdown-toggle">
+		<i class="icon-comment"></i>
+		<span class="menu-text"> 广告管理</span>
+
+		<b class="arrow icon-angle-down"></b>
+	</a>
+	<ul class="submenu" id="news">
+		<li class="index">
+			<a href="{:U('News/index')}" class="dropdown-toggle">
+				<i class="icon-double-angle-right"></i>
+				广告列表
+			</a>
+		</li>
+		<li class="add">
+			<a href="{:U('News/add')}" class="dropdown-toggle">
+				<i class="icon-double-angle-right"></i>
+				添加广告
+			</a>
+		</li>
+	</ul>
+</li>
+
+<!-- 简历管理 start -->
+<li>
+	<a href="#" class="dropdown-toggle">
+		<i class="icon-edit"></i>
+		<span class="menu-text"> 简历管理</span>
+		<b class="arrow icon-angle-down"></b>
+	</a>
+	<ul class="submenu" id="resume">
+		<li class="index">
+			<a href="{:U('Resume/index')}" class="dropdown-toggle">
+				<i class="icon-double-angle-right"></i>
+				所有简历
+			</a>
+		</li>
+	</ul>
+</li>
+<!-- 简历管理 end -->
+</ul>
+<!-- /.nav-list -->
+
+<div class="sidebar-collapse" id="sidebar-collapse">
+	<i class="icon-double-angle-left" data-icon1="icon-double-angle-left" data-icon2="icon-double-angle-right"></i>
+</div>
+
+<script type="text/javascript">
+	seajs.use(["ace-extra"], function (ace) {
+		try {
+			ace.settings.check('sidebar', 'collapsed')
+		} catch (e) {
+		}
+	})
+	//左侧菜单栏 open+active
+	seajs.use(['$'], function ($) {
+		var controller = $("#dataphp").attr("data-controller").toLocaleLowerCase();
+		var action = $("#dataphp").attr("data-action").toLocaleLowerCase();
+		(function () {
+			if ( action ) {
+				$("#" + controller).find("." + action).addClass("active").siblings().removeClass("active");
+				$("#" + controller).find("." + action).parents("li").addClass("active open").siblings().removeClass("active open");
+			}
+			//管理组特别处理
+			var rbac = ['admin', 'role', 'node'];
+			if ( rbac.toString().indexOf(controller) > -1 ) {
+				$("."+controller).addClass("active").siblings().removeClass('active');
+				$("."+controller).parents("li").addClass("active open").siblings().removeClass("active open");
+			}
+		})();
+	})
+</script>
+</div>
+<!--右侧内容 start-->
+<div class="main-content">
+	<!--面包屑 start-->
+	<div class="breadcrumbs" id="breadcrumbs">
+		<script type="text/javascript">
+			seajs.use(["ace-extra"], function (ace) {
+				try {
+					ace.settings.check('breadcrumbs', 'fixed')
+				} catch (e) {
+				}
+			})
+		</script>
+
+		<ul class="breadcrumb">
+			<li>
+				<i class="icon-home home-icon"></i>
+				<a href="{:U('Index/index')}" style="color: #b33333">首页</a>
+			</li>
+		</ul>
+		<!--面包屑 end-->
+	</div>

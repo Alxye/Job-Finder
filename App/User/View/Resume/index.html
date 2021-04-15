@@ -1,0 +1,1361 @@
+<include file="./App/Home/View/Public/header.html" xmlns="http://www.w3.org/1999/html"/>
+
+<style type="text/css">
+	.resume select.form-control {
+	padding: 7px 5px;
+	height: 40px;
+	width: 100px;
+	display: inline;
+}
+	.resume input.form-control {
+		width: 260px;
+		display: inline;
+	}
+	.resume .form-horizontal .control-label,
+	.resume .form-horizontal .radio,
+	.resume .form-horizontal .checkbox,
+	.resume .form-horizontal .radio-inline,
+	.resume .form-horizontal .checkbox-inline {
+		padding-top: 12px;
+		margin-top: 0;
+		margin-bottom: 0;
+	}
+	.resume .form-horizontal .form-control-static {
+	padding-top: 12px;
+}
+
+	/****************************************************************************************/
+	/*                                     企业列表                                         */
+	/****************************************************************************************/
+
+	.wei-user-list {
+
+	}
+
+	.wei-user-list li {
+		padding: 12px 20px 12px 12px;
+		text-align: left;
+		border-bottom: 1px solid #E0E0E0;
+		min-height: 112px;
+	}
+
+	.wei-user-list.hide-last-border li:last-child {
+		border-bottom: none;
+	}
+
+	.wei-user-list li:hover {
+		background-color: #f2f2f2;
+	}
+
+	.wei-user-list h3 {
+		margin-top: -4px;
+	}
+
+	.wei-user-list h3 .small {
+		font-size: 80%;
+	}
+
+	.wei-user-list > li > p > span {
+		margin-right: 20px;
+	}
+
+	.wei-user-list .wei-user-logo {
+		width: 90px;
+		height: 90px;
+		margin-right: 15px;
+	}
+
+	.wei-user-list .wei-user-logo img {
+		width: 90px;
+		height: 90px;
+	}
+
+	#logo_img {
+		width: 60px;
+		height: 60px;
+	}
+
+	/****************************************************************************************/
+	/*                                       简历                                           */
+	/****************************************************************************************/
+
+	.resume_job {
+		background-color: #fff;
+		border: 1px solid #D3D4D5;
+		margin: 20px 0;
+		padding: 20px 30px;
+	}
+
+	.resume_job .wei-user-logo {
+		float: left;
+		width: 60px;
+		height: 60px;
+		margin: 5px 20px 0 0;
+		border: 1px solid #D3D4D5;
+	}
+
+	.resume_job p {
+		font-size: 16px;
+		line-height: 150%;
+		margin: 4px 0;
+	}
+
+	.resume_job .message {
+		padding: 20px 16px 0 0;
+	}
+
+	.resume_header {
+		margin: 20px 0;
+	}
+
+	.resume_header > span {
+		float:left;
+		margin-top: -2px;
+		font-size: 16px;
+	}
+
+	.resume_header > .btn {
+		float: right;
+		margin-top: -6px;
+		margin-right: 5px;
+	}
+
+	.resume_header .progress {
+		float: left;
+		width: 500px;
+		background-color: #EBEBEB;
+	}
+
+	.resume {
+		background-color: #fff;
+		border: 1px solid #D3D4D5;
+		margin-top: 20px;
+	}
+
+	.resume_switcher {
+		background-color: #DBDFE2;
+		height: 60px;
+	}
+
+	.resume_switcher li {
+		float: left;
+		list-style-type: none;
+		width: 50%;
+		text-align: center;
+	}
+
+	.resume_switcher li a {
+		display: block;
+		line-height: 60px;
+		font-size: 30px;
+	}
+
+	.resume_switcher li a.on {
+		background-color: #579dde;
+		color: #fff;
+	}
+
+	.resume_nav {
+		background-color: #eaeaea;
+		height:40px;
+		border: 1px solid #DEDEDE;
+	}
+
+	.resume_nav li {
+		float: left;
+		list-style-type: none;
+		text-align: center;
+	}
+
+	.resume_nav li a {
+		line-height:35px;
+		display:block;
+		padding:0 15px;
+		border-right:1px solid #dedede;
+		margin: 3px 0;
+	}
+
+	.resume_nav li:last-child a {
+		border-right: none;
+	}
+
+	.resume_nav li a.on {
+		color: #579dd3;
+		background-color: #ffffff;
+		border-right: 1px solid #dedede;
+		padding:3px 15px;
+		margin: 0;
+	}
+
+	.resume_title {
+		border-bottom: 1px solid #ddd;
+		padding-bottom: 6px;
+	}
+
+	.resume_title h2 {
+		border-bottom: 8px solid #579dde;
+		width: 86px;
+		padding: 0 2px;
+		display: inline;
+	}
+
+	.resume_title i {
+		font-size: 30px;
+		margin-right: 20px;
+	}
+
+	.resume_content {
+		margin: 30px;
+	}
+
+	.resume_content form {
+		margin: 30px 0;
+	}
+
+	.resume_item_list {
+		margin-top: 30px;
+	}
+
+	.resume_item_list li {
+		margin: 20px 20px;
+		border-left: 1px solid #579DDE;
+		padding-left: 20px;
+	}
+
+	.resume_item_list li.education {
+		font-size: 15px;
+	}
+
+	.resume_item_list li h3 {
+		font-size: 16px;
+		display: inline;
+	}
+
+	.resume_item_list li p {
+		margin-top: 5px;
+		line-height: 150%;
+	}
+
+	.resume_btn_large {
+		width: 100%;
+		height: 50px;
+		font-size: 27px;
+	}
+
+	.resume_toolbar {
+		position: absolute;
+		right: 0;
+		top: 60px;
+	}
+
+	/* 简历打印 */
+	@media print {
+		.resume {
+			width: 100%;
+		}
+
+		.resume_toolbar,
+		.mtop,
+		.header,
+		.footer,
+		#toast-container {
+			display: none;
+		}
+
+		.header .post span {
+			display: block;
+		}
+
+		.header .logo {
+			padding-left: 10px;
+		}
+	}
+</style>
+<div class="main2">
+	<notempty name="job">
+	<div class="resume_job"><h2>您正在申请以下职位：</h2>
+
+		<div class="wei-user-logo imgLiquid_bgSize imgLiquid_ready" style=" background-size: contain; background-position: 50% 50%; background-repeat: no-repeat;">
+			<img id="logo_img" src="__PUBLIC__/images/zhiwei2.gif">
+		</div>
+		<p style="margin-top:8px;"><a href="{:U('Home/Company/item?comid='.$job['comid'])}" class="highlight" title="{$job.cname}">{$job.cname}</a></p>
+
+		<p><a href="{:U('Home/Job/item?jobid='.$job['id'])}" class="highlight">{$job.title}</a>&nbsp;&nbsp;&nbsp;&nbsp;
+<!--			<span class="text-primary">{$job.city}</span>&nbsp;&nbsp;&nbsp;&nbsp;-->
+			<strong class="cOrange">￥{$job.payid}</strong></p>
+
+		<div class="right" style="margin-top:-80px; margin-right: -12px;">
+			<a href="javascript:;" onclick="doApply('{$job.id}');" class="btn btn-primary btn-lg apply_button" style="margin:0 0 10px 32px;">
+				马上申请
+			</a><br>
+			<span class="text-muted">&nbsp;</span>
+		</div>
+	</div>
+	</notempty>
+	<div class="resume">
+		<ul class="resume_switcher">
+			<li><a class="on">在线简历</a></li>
+		</ul>
+		<div id="box_placeholder" style="height:42px; width:860px; display:none;"></div>
+		<ul class="resume_nav">
+			<li style="width: 235px;"><a class="on" href="#basic">基本信息</a></li>
+			<li style="width: 235px;"><a href="#expect">求职意向</a></li>
+			<li style="width: 235px;"><a href="#company">工作经历</a></li>
+			<li style="width: 235px;"><a href="#project">项目经验</a></li>
+			<li style="width: 235px;"><a href="#education">教育经历</a></li>
+		</ul>
+		{/* 简历主体 */}
+		<div class="resume_content">
+			{//预览简历}
+			<div class="resume_header">
+				<a href="{:U('Preview/index')}" target="_blank" class="btn btn-default">
+					<i class="icon-eye-open"></i>&nbsp;在线预览
+				</a>
+			</div>
+			<div style="clear:both;"></div>
+			<div sytle="height:50px">&nbsp;</div>
+			{/* 基本信息 */}
+			<div id="basic">
+				<div class="resume_title">
+					<h2>基本信息</h2>
+					<a href="javascript:;" onclick="updateAtomicItem('resume_basic');" class="right">
+						<i class="icon-pencil"></i>
+					</a>
+				</div>
+				{/* 基本信息(显示) 当没有简历基本信息时,不显示 */}
+				<form class="form-horizontal" role="form" id="resume_basic">
+					<notempty name="basic.id">
+						<div class="form-group"><label for="name" class="col-sm-1 control-label">基本</label>
+
+							<div class="col-sm-4">
+								<p class="form-control-static">{$basic.truename}&nbsp;&nbsp;|&nbsp;&nbsp;
+									{//判断性别}
+									<if condition="$basic['sex'] eq 1">男
+										<else/>
+										女
+									</if>
+									&nbsp;&nbsp;|&nbsp;&nbsp;
+									{$basic.birthday|date='Y.m.d',###}
+								</p>
+							</div>
+						</div>
+						<div class="form-group"><label for="name" class="col-sm-1 control-label">联系方式</label>
+
+							<div class="col-sm-4">
+								<p class="form-control-static">{$basic.email}&nbsp;&nbsp;|&nbsp;&nbsp;{$basic.phone}</p>
+							</div>
+						</div>
+						<div class="form-group"><label for="name" class="col-sm-1 control-label">当前状态</label>
+
+							<div class="col-sm-4">
+								<p class="form-control-static">
+									{//输出当前状态}
+									<foreach name="basic.slist" item="stlist" key="k">
+										<if condition="$k eq $basic['status']">{$stlist}</if>
+									</foreach>
+								</p>
+							</div>
+						</div>
+						<div class="form-group"><label for="name" class="col-sm-1 control-label">学历</label>
+
+							<div class="col-sm-4">
+								<p class="form-control-static">
+									{//输出当前学历}
+									<foreach name="eidlist" item="elist">
+										<if condition="$elist.id eq $basic['eid']">{$elist.tagname}</if>
+									</foreach>
+								</p>
+							</div>
+						</div>
+						<div class="form-group"><label for="name" class="col-sm-1 control-label">工作经验</label>
+
+							<div class="col-sm-4">
+								<p class="form-control-static">
+									{//输出工作经验}
+									<foreach name="basic.wylist" item="wylist">
+										<if condition="$wylist.id eq $basic['year']">{$wylist.tagname}</if>
+									</foreach>
+								</p>
+							</div>
+						</div>
+						<div class="form-group"><label for="name" class="col-sm-1 control-label">现居地</label>
+
+							<div class="col-sm-4">
+								<p class="form-control-static">
+									<foreach name="basic.citylist" item="ncity">
+										<if condition="$ncity.id eq $basic['nowcid']">{$ncity.name}</if>
+									</foreach>
+								</p>
+							</div>
+						</div>
+						<div class="form-group"><label for="name" class="col-sm-1 control-label">籍贯</label>
+
+							<div class="col-sm-4">
+								<p class="form-control-static">
+									<foreach name="basic.citylist" item="ocity">
+										<if condition="$ocity.id eq $basic['oldcid']">{$ocity.name}</if>
+									</foreach>
+								</p>
+							</div>
+						</div>
+					</notempty>
+				</form>
+				{/* 基本信息(编辑) 无数据时显示做添加 */}
+				<form class="form-horizontal ajaxForm" role="form" id="form_resume_basic" method="post" action={:U("Resume/updateBasic")} style="display:<notempty name='basic.id'>none</notempty>;">
+					<input type="hidden" name="id" value="{$basic.id}"/>
+
+					<div class="form-group">
+						<label for="name" class="col-sm-1 control-label">真实姓名</label>
+
+						<div class="col-sm-4">
+							<input class="form-control" id="name" name="truename" value="{$basic.truename}" placeholder="真实姓名" type="text">
+						</div>
+					</div>
+					<div class="form-group">
+						<label for="email" class="col-sm-1 control-label">常用邮箱</label>
+
+						<div class="col-sm-4">
+							<input class="form-control" id="email" name="email" value="{$basic.email}" placeholder="常用邮箱" type="text">
+						</div>
+					</div>
+					<div class="form-group">
+						<label for="mobile" class="col-sm-1 control-label">手机号码</label>
+
+						<div class="col-sm-4">
+							<input class="form-control" id="mobile" name="phone" value="{$basic.phone}" placeholder="手机号码" type="text">
+						</div>
+					</div>
+					<div class="form-group">
+						<label for="work_status" class="col-sm-1 control-label">当前状态</label>
+
+						<div class="col-sm-4">
+							<select id="work_status" name="status" class="form-control" style="width: 286px;">
+								<foreach name="basic.slist" item="st" key="k">
+									<option value="{$k}"
+									<if condition="$basic.status eq $k">selected</if>
+									>{$st}</option>
+								</foreach>
+							</select>
+						</div>
+					</div>
+					<div class="form-group">
+						<label for="sex" class="col-sm-1 control-label">性别</label>
+
+						<div class="col-sm-4">
+							<div class="radio-inline">
+								<label>
+									<input name="sex" id="" value="1" alt="男" type="radio"
+									<if condition="$basic.sex eq 1">checked</if>
+									>男
+								</label>
+							</div>
+							<div class="radio-inline">
+								<label>
+									<input name="sex" id="" value="2" alt="女" type="radio"
+									<if condition="$basic.sex eq 2">checked</if>
+									>女
+								</label>
+							</div>
+						</div>
+					</div>
+					<div class="form-group">
+						<label for="birth_year" class="col-sm-1 control-label">出生日期</label>
+
+						<div class="col-sm-6">
+							<select id="birth_year" name="birth_year" class="form-control">
+								<foreach name="basic.bylist" item="byear">
+									<option value="{$byear}"
+									<if condition="$byear eq $basic['byear']">selected</if>
+									>{$byear}</option>
+								</foreach>
+							</select>&nbsp;年&nbsp;
+							<select name="birth_month" class="form-control">
+								<for start="1" end="13">
+									<option value="{$i}"
+									<if condition="$basic.bmonth eq $i">selected</if>
+									>{$i}</option>
+								</for>
+							</select>&nbsp;月&nbsp;
+							<select name="birth_day" class="form-control">
+								<for start="1" end="32">
+									<option value="{$i}"
+									<if condition="$basic.bday eq $i">selected</if>
+									>{$i}</option>
+								</for>
+							</select>&nbsp;日&nbsp;
+						</div>
+					</div>
+					<div class="form-group">
+						<label for="degree_basic" class="col-sm-1 control-label">学历</label>
+
+						<div class="col-sm-6">
+							<select id="degree_basic" name="eid" class="form-control">
+								<foreach name="eidlist" item="edu">
+									<option value="{$edu.id}"
+									<if condition="$edu.id eq $basic['eid']">selected</if>
+									>{$edu.tagname}</option>
+								</foreach>
+
+							</select>
+							<label style="padding-right: 15px; width: 136px; text-align: right;">工作年限</label>
+							<select name="year" class="form-control">
+								<foreach name="basic.wylist" item="wyear">
+									<option value="{$wyear.id}"
+									<if condition="$wyear.id eq $basic['year']">selected</if>
+									>{$wyear.tagname}</option>
+								</foreach>
+							</select>
+						</div>
+					</div>
+					<div class="form-group">
+						<label for="current_province_id" class="col-sm-1 control-label">现居地</label>
+
+						<div class="col-sm-6">
+							<select id="current_province_id" name="nowcid" class="form-control">
+								<foreach name="basic.citylist" item="ncity">
+									<option value="{$ncity.id}"
+									<if condition="$ncity.id eq $basic['nowcid']">selected</if>
+									>{$ncity.name}</option>
+								</foreach>
+							</select>
+							<label style="padding-right: 15px; width: 136px; text-align: right;">籍贯</label>
+							<select id="native_province_id" name="oldcid" class="form-control">
+								<foreach name="basic.citylist" item="ocity">
+									<option value="{$ocity.id}"
+									<if condition="$ocity.id eq $basic['oldcid']">selected</if>
+									>{$ocity.name}</option>
+								</foreach>
+							</select>
+						</div>
+					</div>
+					<div class="form-group">
+						<div style="margin-left: 140px; margin-bottom: 20px;">
+							<button type="submit" class="btn btn-primary">保存</button>
+							&nbsp;
+							<button type="button" class="btn btn-default" onclick="cancelUpdateAtomicItem('resume_basic');">取消</button>
+						</div>
+					</div>
+				</form>
+			</div>
+			{/* 基本信息end */}
+
+			{/* 求职意向 */}
+			<div id="expect">
+				<div class="resume_title">
+					<h2>求职意向</h2>
+					<a href="javascript:;" onclick="updateAtomicItem('resume_expect');" class="right">
+						<i class="icon-pencil"></i>
+					</a>
+				</div>
+				{/* 求职意向(显示区) 无数据时不显示 */}
+				<form class="form-horizontal" role="form" id="resume_expect">
+					<notempty name="basic.desc">
+						<div class="form-group">
+							<label for="name" class="col-sm-1 control-label">期望城市</label>
+
+							<div class="col-sm-4">
+								<p class="form-control-static">
+									<foreach name="basic.hopecitylist" item="hcity">
+										<if condition="$hcity.id eq $basic['hopecid']">{$hcity.name}</if>
+									</foreach>
+								</p>
+							</div>
+						</div>
+						<div class="form-group">
+							<label for="name" class="col-sm-1 control-label">期望职位</label>
+
+							<div class="col-sm-4">
+								<p class="form-control-static">{$basic.hopejob}</p>
+							</div>
+						</div>
+						<div class="form-group">
+							<label for="name" class="col-sm-1 control-label">期望薪资</label>
+
+							<div class="col-sm-4">
+								<p class="form-control-static">
+									<foreach name="paylist" item="plist">
+										<if condition="$plist.id eq $basic['hopepay']">{$plist.tagname}</if>
+									</foreach>
+								</p>
+							</div>
+						</div>
+						<div class="form-group">
+							<label for="name" class="col-sm-1 control-label">自我描述</label>
+
+							<div class="col-sm-9">
+								<p class="form-control-static">{$basic.desc}</p>
+							</div>
+						</div>
+					</notempty>
+				</form>
+				{/* 求职意向(编辑) 无数据时显示做添加 */}
+				<form class="form-horizontal ajaxForm" role="form" id="form_resume_expect" method="post" action="{:U('Resume/updateJob')}" style="display:<notempty name="basic.desc">none</notempty>;">
+				<input type="hidden" name="id" value="{$basic.id}">
+
+				<div class="form-group">
+					<label for="expect_city_id" class="col-sm-1 control-label">期望城市</label>
+
+					<div class="col-sm-6">
+						<select id="expect_city_id" name="hopecid" class="form-control">
+							<foreach name="basic.hopecitylist" item="hcity">
+								<option value="{$hcity.id}"
+								<if condition="$hcity.id eq $basic['hopecid']">selected</if>
+								>{$hcity.name}</option>
+							</foreach>
+						</select>
+					</div>
+				</div>
+				<div class="form-group">
+					<label for="expect_job" class="col-sm-1 control-label">期望职位</label>
+
+					<div class="col-sm-4">
+						<input class="form-control" id="expect_job" name="hopejob" value="{$basic.hopejob}" type="text">
+					</div>
+				</div>
+				<div class="form-group">
+					<label for="expect_salary" class="col-sm-1 control-label">期望薪资</label>
+
+					<div class="col-sm-4">
+						<select id="expect_salary" name="hopepay" class="form-control" style="width: 286px;">
+							<foreach name="paylist" item="plist">
+								<option value="{$plist.id}"
+								<if condition="$plist.id eq $basic['hopepay']">selected</if>
+								>{$plist.tagname}</option>
+							</foreach>
+						</select>
+					</div>
+				</div>
+				<div class="form-group">
+					<label for="introduction" class="col-sm-1 control-label">自我描述</label>
+
+					<div class="col-sm-9">
+						<textarea id="introduction" name="desc" class="form-control" rows="8" placeholder="必填">{$basic.desc}</textarea>
+						<span class="help-block">自我评价、所获奖励、在线作品等</span>
+					</div>
+				</div>
+				<div class="form-group">
+					<div style="margin-left: 140px; margin-bottom: 20px;">
+						<button type="submit" class="btn btn-primary">保存</button>
+						&nbsp;
+						<button type="button" class="btn btn-default" onclick="cancelUpdateAtomicItem('resume_expect');">取消</button>
+					</div>
+				</div>
+				</form>
+			</div>
+			{/* 求职意向end */}
+
+			{/* 工作经历 */}
+			<div id="company">
+				<div class="resume_title"><h2>工作经历</h2></div>
+				{/* 空白编辑做添加 */}
+				<form class="form-horizontal ajaxForm" role="form" id="form_resume_company" method="post" action="{:U('Resume/updateCompany')}" style="display:none;">
+					<input name="wid" id="work_id" value="0" type="hidden">
+
+					<div class="form-group">
+						<label for="company_name" class="col-sm-1 control-label">公司名称</label>
+
+						<div class="col-sm-4">
+							<input class="form-control" id="company_name" name="comname" placeholder="公司名称" type="text">
+						</div>
+					</div>
+					<div class="form-group">
+						<label for="job_name" class="col-sm-1 control-label">职位名称</label>
+
+						<div class="col-sm-4">
+							<input class="form-control" id="job_name" name="job" placeholder="如：产品经理" type="text">
+						</div>
+					</div>
+					<div class="form-group">
+						<label for="company_salary" class="col-sm-1 control-label">薪资</label>
+
+						<div class="col-sm-4">
+							<select id="company_salary" name="pay" class="form-control" style="width: 286px;">
+								{//遍历薪资}
+								<foreach name="paylist" item="plist">
+									<option value="{$plist.id}">{$plist.tagname}</option>
+								</foreach>
+							</select>
+						</div>
+					</div>
+					<div class="form-group">
+						<label for="from_year_company" class="col-sm-1 control-label">起止日期</label>
+
+						<div class="col-sm-9">
+
+							<select id="from_year_company" name="syear" class="form-control">
+								{//遍历起始年}
+								<foreach name="ssyear" item="starty">
+									<option value="{$starty}">{$starty}</option>
+								</foreach>
+							</select>&nbsp;年&nbsp;
+
+							<select id="from_month_company" name="smonth" class="form-control">
+								{//遍历起始月}
+								<for start="1" end="13">
+									<option value="{$i}">{$i}</option>
+								</for>
+							</select>&nbsp;月&nbsp;
+
+							-
+
+							<select id="to_year_company" name="tyear" class="form-control">
+								<option value="0">至今</option>
+								{//遍历终止年}
+								<foreach name="ssyear" item="stopy">
+									<option value="{$stopy}">{$stopy}</option>
+								</foreach>
+							</select>&nbsp;年&nbsp;
+
+							<select id="to_month_company" name="tmonth" class="form-control">
+								<option value="0">至今</option>
+								{//遍历终止月}
+								<for start="1" end="13">
+									<option value="{$i}">{$i}</option>
+								</for>
+							</select>&nbsp;月&nbsp;
+						</div>
+					</div>
+					<div class="form-group">
+						<label for="description_company" class="col-sm-1 control-label">工作描述</label>
+
+						<div class="col-sm-9">
+							<textarea id="description_company" name="wdesc" class="form-control" rows="5" placeholder="">{$work.wdesc}</textarea>
+							<span class="help-block">工作内容、工作表现等</span>
+						</div>
+					</div>
+					<div class="form-group">
+						<div style="margin-left: 140px; margin-bottom: 20px;">
+							<button type="submit" class="btn btn-primary">保存</button>
+							&nbsp;
+							<button type="button" class="btn btn-default" onclick="cancelUpdateListItem('company','');">取消</button>
+						</div>
+					</div>
+				</form>
+				{/* 有数据时输出编辑 */}
+				<notempty name="work">
+					<foreach name="work" item="w">
+						<form class="form-horizontal ajaxForm" role="form" id="form_resume_company{$w.id}" method="post" action="{:U('Resume/updateCompany')}" style="display:none;">
+							<input name="id" id="work_id" value="{$w.id}" type="hidden">
+
+							<div class="form-group">
+								<label for="company_name" class="col-sm-1 control-label">公司名称</label>
+
+								<div class="col-sm-4">
+									<input class="form-control" id="company_name" name="comname" placeholder="公司名称" type="text" value="{$w.comname}">
+								</div>
+							</div>
+							<div class="form-group">
+								<label for="job_name" class="col-sm-1 control-label">职位名称</label>
+
+								<div class="col-sm-4">
+									<input class="form-control" id="job_name" name="job" placeholder="如：产品经理" type="text" value="{$w.job}">
+								</div>
+							</div>
+							<div class="form-group">
+								<label for="company_salary" class="col-sm-1 control-label">薪资</label>
+
+								<div class="col-sm-4">
+									<select id="company_salary" name="pay" class="form-control" style="width: 286px;">
+										{//遍历薪资}
+										<foreach name="paylist" item="plist">
+											<option value="{$plist.id}"<if condition="$plist.id eq $w['pay']">selected</if>>{$plist.tagname}</option>
+										</foreach>
+									</select>
+								</div>
+							</div>
+							<div class="form-group">
+								<label for="from_year_company" class="col-sm-1 control-label">起止日期</label>
+
+								<div class="col-sm-9">
+
+									<select id="from_year_company" name="syear" class="form-control">
+										{//遍历起始年}
+										<foreach name="ssyear" item="starty">
+											<option value="{$starty}"
+											<if condition="$starty eq $w['syear']">selected</if>
+											>{$starty}</option>
+										</foreach>
+									</select>&nbsp;年&nbsp;
+
+									<select id="from_month_company" name="smonth" class="form-control">
+										{//遍历起始月}
+										<for start="1" end="13">
+											<option value="{$i}"
+											<if condition="$i eq $w['smonth']">selected</if>
+											>{$i}</option>
+										</for>
+									</select>&nbsp;月&nbsp;
+
+									-
+
+									<select id="to_year_company" name="tyear" class="form-control">
+										<option value="0"
+										<if condition="$w.tyear eq 0">selected</if>
+										>至今</option>
+										{//遍历终止年}
+										<foreach name="ssyear" item="stopy">
+											<option value="{$stopy}"
+											<if condition="$stopy eq $w['tyear']">selected</if>
+											>{$stopy}</option>
+										</foreach>
+									</select>&nbsp;年&nbsp;
+
+									<select id="to_month_company" name="tmonth" class="form-control">
+										<option value="0"
+										<if condition="$w.tmonth eq 0">selected</if>
+										>至今</option>
+										{//遍历终止月}
+										<for start="1" end="13">
+											<option value="{$i}"
+											<if condition="$i eq $w['tmonth']">selected</if>
+											>{$i}</option>
+										</for>
+									</select>&nbsp;月&nbsp;
+								</div>
+							</div>
+							<div class="form-group">
+								<label for="description_company" class="col-sm-1 control-label">工作描述</label>
+
+								<div class="col-sm-9">
+									<textarea id="description_company" name="wdesc" class="form-control" rows="5" placeholder="">{$w.wdesc}</textarea>
+									<span class="help-block">工作内容、工作表现等</span>
+								</div>
+							</div>
+							<div class="form-group">
+								<div style="margin-left: 140px; margin-bottom: 20px;">
+									<button type="submit" class="btn btn-primary">保存</button>
+									&nbsp;
+									<button type="button" class="btn btn-default" onclick="cancelUpdateListItem('company', {$w.id});">取消</button>
+								</div>
+							</div>
+						</form>
+					</foreach>
+				</notempty>
+				{/* 工作经历(显示) */}
+				<ul id="list_resume_company" class="resume_item_list">
+					{/* 遍历工作经历 */}
+					<foreach name="work" item="work">
+						<li id="company_{$work.id}">
+							<p>
+
+							<h3>{$work.syear}.{$work.smonth} -
+								<if condition="$work.tyear neq 0">{$work.tyear}.{$work.tmonth}
+									<else/>
+									至今
+								</if>
+								&nbsp;&nbsp;&nbsp;&nbsp;{$work.comname}&nbsp;&nbsp;&nbsp;&nbsp;{$work.job}&nbsp;&nbsp;&nbsp;&nbsp;￥
+							<foreach name="paylist" item="pl">
+								<if condition="$pl.id eq $work['pay']">{$pl.tagname}</if>
+							</foreach>
+							</h3>
+							<span class="right">
+								<a href="javascript:;" onclick="editItem('company', '{$work.id}')" class="highlight">编辑</a>                                &nbsp;&nbsp;&nbsp;&nbsp;
+	                            <a href="javascript:;" onclick="deleteItem('company', '{$work.id}');" class="highlight">删除</a>
+							</span>
+							</p>
+							<p>{$work.wdesc}</p>
+						</li>
+					</foreach>
+				</ul>
+				{/* 工作经历添加按钮 */}
+				<div class="" style="margin: 30px 20px;">
+					<button id="add_btn_resume_company" type="button" class="btn btn-primary resume_btn_large" onclick="updateListItem('resume_company');" style="font-size:27px;"><i class="icon-plus"></i>&nbsp;添加</button>
+				</div>
+			</div>
+			{/* 工作经历end */}
+
+			{/* 项目经验 */}
+			<div id="project">
+				<div class="resume_title"><h2>项目经验</h2></div>
+				{/* 项目经验(空白编辑添加) */}
+				<form class="form-horizontal ajaxForm" role="form" id="form_resume_project" method="post" action="{:U('Resume/updateProject')}" style="display:none;">
+					<input name="id" id="project_id" value="0" type="hidden">
+
+					<div class="form-group">
+						<label for="project_name" class="col-sm-1 control-label">项目名称</label>
+
+						<div class="col-sm-4">
+							<input class="form-control" id="project_name" name="pname" placeholder="项目名称" type="text"></div>
+					</div>
+					<div class="form-group">
+						<label for="position" class="col-sm-1 control-label">担任职务</label>
+
+						<div class="col-sm-4">
+							<input class="form-control" id="position" name="post" placeholder="如：产品经理" type="text">
+						</div>
+					</div>
+					<div class="form-group">
+						<label for="from_year_project" class="col-sm-1 control-label">起止日期</label>
+
+						<div class="col-sm-9">
+							<select id="from_year_project" name="syear" class="form-control">
+								{//遍历起始年}
+								<foreach name="ssyear" item="starty">
+									<option value="{$starty}">{$starty}</option>
+								</foreach>
+							</select>&nbsp;年&nbsp;
+
+							<select id="from_month_project" name="smonth" class="form-control">
+								{//遍历起始月}
+								<for start="1" end="13">
+									<option value="{$i}">{$i}</option>
+								</for>
+							</select>&nbsp;月&nbsp;
+
+							-
+
+							<select id="to_year_project" name="tyear" class="form-control">
+								<option value="0">至今</option>
+								{//遍历终止年}
+								<foreach name="ssyear" item="stopy">
+									<option value="{$stopy}">{$stopy}</option>
+								</foreach>
+							</select>&nbsp;年&nbsp;
+
+							<select id="to_month_project" name="tmonth" class="form-control">
+								<option value="0">至今</option>
+								{//遍历终止月}
+								<for start="1" end="13">4
+									<option value="{$i}">{$i}</option>
+								</for>
+							</select>&nbsp;月&nbsp;
+						</div>
+					</div>
+					<div class="form-group">
+						<label for="description_project" class="col-sm-1 control-label">项目描述</label>
+
+						<div class="col-sm-9">
+							<textarea id="description_project" name="prodesc" class="form-control" rows="5" placeholder=""></textarea>
+							<span class="help-block">项目介绍、在线演示地址等</span>
+						</div>
+					</div>
+					<div class="form-group">
+						<div style="margin-left: 140px; margin-bottom: 20px;">
+							<button type="submit" class="btn btn-primary">保存</button>
+							&nbsp;
+							<button type="button" class="btn btn-default" onclick="cancelUpdateListItem('project','');">取消</button>
+						</div>
+					</div>
+				</form>
+
+				{/* 项目编辑编辑(有数据时显示,对应显示编辑) */}
+				<notempty name="project">
+					<foreach name="project" item="pro">
+						<form class="form-horizontal ajaxForm" role="form" id="form_resume_project{$pro.id}" method="post" action="{:U('Resume/updateProject')}" style="display:none;">
+							<input name="id" id="project_id" value="{$pro.id}" type="hidden">
+
+							<div class="form-group">
+								<label for="project_name" class="col-sm-1 control-label">项目名称</label>
+
+								<div class="col-sm-4">
+									<input class="form-control" id="project_name" name="pname" placeholder="项目名称" type="text" value="{$pro.pname}"></div>
+							</div>
+							<div class="form-group">
+								<label for="position" class="col-sm-1 control-label">担任职务</label>
+
+								<div class="col-sm-4">
+									<input class="form-control" id="position" name="post" placeholder="如：产品经理" type="text" value="{$pro.post}">
+								</div>
+							</div>
+							<div class="form-group">
+								<label for="from_year_project" class="col-sm-1 control-label">起止日期</label>
+
+								<div class="col-sm-9">
+									<select id="from_year_project" name="syear" class="form-control">
+										{//遍历起始年}
+										<foreach name="ssyear" item="starty">
+											<option value="{$starty}"
+											<if condition="$starty eq $pro['syear']">selected</if>
+											>{$starty}</option>
+										</foreach>
+									</select>&nbsp;年&nbsp;
+
+									<select id="from_month_project" name="smonth" class="form-control">
+										{//遍历起始月}
+										<for start="1" end="13">
+											<option value="{$i}"
+											<if condition="$i eq $pro['smonth']">selected</if>
+											>{$i}</option>
+										</for>
+									</select>&nbsp;月&nbsp;
+
+									-
+
+									<select id="to_year_project" name="tyear" class="form-control">
+										<option value="0"
+										<if condition="$pro.tyear eq 0">selected</if>
+										>至今</option>
+										{//遍历终止年}
+										<foreach name="ssyear" item="stopy">
+											<option value="{$stopy}"
+											<if condition="$stopy eq $pro['smonth']">selected</if>
+											>{$stopy}</option>
+										</foreach>
+									</select>&nbsp;年&nbsp;
+
+									<select id="to_month_project" name="tmonth" class="form-control">
+										<option value="0"
+										<if condition="$pro.tmonth eq 0">selected</if>
+										>至今</option>
+										{//遍历终止月}
+										<for start="1" end="13">4
+											<option value="{$i}"
+											<if condition="$i eq $pro['tmonth']">selected</if>
+											>{$i}</option>
+										</for>
+									</select>&nbsp;月&nbsp;
+								</div>
+							</div>
+							<div class="form-group">
+								<label for="description_project" class="col-sm-1 control-label">项目描述</label>
+
+								<div class="col-sm-9">
+									<textarea id="description_project" name="prodesc" class="form-control" rows="5" placeholder="">{$pro.prodesc}</textarea>
+									<span class="help-block">项目介绍、在线演示地址等</span>
+								</div>
+							</div>
+							<div class="form-group">
+								<div style="margin-left: 140px; margin-bottom: 20px;">
+									<button type="submit" class="btn btn-primary">保存</button>
+									&nbsp;
+									<button type="button" class="btn btn-default" onclick="cancelUpdateListItem('project','{$pro.id}');">取消</button>
+								</div>
+							</div>
+						</form>
+					</foreach>
+				</notempty>
+				{/* 项目显示 */}
+				<ul id="list_resume_project" class="resume_item_list">
+					<foreach name="project" item="pro">
+						<li id="project_{$pro.id}">
+							<p>
+
+							<h3>{$pro.syear}.{$pro.smonth} -
+								<if condition="$pro.tyear neq 0">{$pro.tyear}.{$pro.tmonth}
+									<else/>
+									至今
+								</if>
+								&nbsp;&nbsp;&nbsp;&nbsp;{$pro.pname}&nbsp;&nbsp;&nbsp;&nbsp;{$pro.post}
+							</h3>
+							<span class="right">
+								<a href="javascript:;" onclick="editItem('project','{$pro.id}');" class="highlight">编辑</a>&nbsp;&nbsp;&nbsp;&nbsp;
+								<a href="javascript:;" onclick="deleteItem('project', '{$pro.id}');" class="highlight">删除</a>
+							</span>
+							</p>
+							<p>{$pro.prodesc}</p>
+						</li>
+					</foreach>
+				</ul>
+				{/* 项目经验添加按钮 */}
+				<div class="" style="margin: 30px 20px;">
+					<button id="add_btn_resume_project" type="button" class="btn btn-primary resume_btn_large" onclick="updateListItem('resume_project');" style="font-size:27px;">
+						<i class="icon-plus"></i>&nbsp;添加
+					</button>
+				</div>
+			</div>
+			{/* 项目经验end */}
+
+			{/* 教育经历 */}
+			<div id="education">
+				<div class="resume_title"><h2>教育经历</h2></div>
+				{/* 教育经历(添加) */}
+				<form class="form-horizontal ajaxForm" role="form" id="form_resume_education" method="post" action="{:U('Resume/updaeEducation')}" style="display:none;">
+					<input name="id" id="id" value="0" type="hidden">
+
+					<div class="form-group">
+						<label for="school_name" class="col-sm-1 control-label">学校名称</label>
+
+						<div class="col-sm-4">
+							<input class="form-control" id="school_name" name="school" placeholder="如：清华大学" type="text">
+						</div>
+					</div>
+					<div class="form-group">
+						<label for="major_name" class="col-sm-1 control-label">专业名称</label>
+
+						<div class="col-sm-4">
+							<input class="form-control" id="major_name" name="specialty" placeholder="如：计算机系" type="text">
+						</div>
+					</div>
+					<div class="form-group">
+						<label for="degree_education" class="col-sm-1 control-label">学历</label>
+
+						<div class="col-sm-9">
+							<select id="degree_education" name="seid" class="form-control">
+								<foreach name="eidlist" item="eli">
+									<option value="{$eli.id}">{$eli.tagname}</if>
+								</foreach>
+							</select>
+						</div>
+					</div>
+					<div class="form-group">
+						<label for="from_year_education" class="col-sm-1 control-label">起止日期</label>
+
+						<div class="col-sm-9">
+							<select id="from_year_education" name="syear" class="form-control">
+								{//遍历起始年}
+								<foreach name="ssyear" item="starty">
+									<option value="{$starty}">{$starty}</option>
+								</foreach>
+							</select>&nbsp;年&nbsp;
+
+							<select id="from_month_education" name="smonth" class="form-control">
+								{//遍历起始月}
+								<for start="1" end="13">
+									<option value="{$i}">{$i}</option>
+								</for>
+							</select>&nbsp;月&nbsp;
+
+							-
+
+							<select id="to_year_education" name="tyear" class="form-control">
+								{//遍历终止年}
+								<foreach name="ssyear" item="stopy">
+									<option value="{$stopy}">{$stopy}</option>
+								</foreach>
+							</select>&nbsp;年&nbsp;
+
+							<select id="to_month_education" name="tmonth" class="form-control">
+								{//遍历终止月}
+								<for start="1" end="13">
+									<option value="{$i}">{$i}</option>
+								</for>
+							</select>&nbsp;月&nbsp;
+						</div>
+					</div>
+					<div class="form-group">
+						<div style="margin-left: 140px; margin-bottom: 20px;">
+							<button type="submit" class="btn btn-primary">保存</button>
+							&nbsp;
+							<button type="button" class="btn btn-default" onclick="cancelUpdateListItem('education','');">取消</button>
+						</div>
+					</div>
+				</form>
+				{/* 教育经历(编辑) */}
+				<foreach name="education" item="e">
+					<form class="form-horizontal" role="form" id="form_resume_education{$e.id}" method="post" action="{:U('Resume/updaeEducation')}" style="display:none;">
+						<input name="id" id="id" value="{$e.id}" type="hidden">
+
+						<div class="form-group">
+							<label for="school_name" class="col-sm-1 control-label">学校名称</label>
+
+							<div class="col-sm-4">
+								<input class="form-control" id="school_name" name="school" placeholder="如：清华大学" type="text" value="{$e.school}">
+							</div>
+						</div>
+						<div class="form-group">
+							<label for="major_name" class="col-sm-1 control-label">专业名称</label>
+
+							<div class="col-sm-4">
+								<input class="form-control" id="major_name" name="specialty" placeholder="如：计算机系" type="text" value="{$e.specialty}">
+							</div>
+						</div>
+						<div class="form-group">
+							<label for="degree_education" class="col-sm-1 control-label">学历</label>
+
+							<div class="col-sm-9">
+								<select id="degree_education" name="seid" class="form-control">
+									<foreach name="eidlist" item="eli">
+										<option value="{$eli.id}"
+										<if condition="$eli.id eq $e['seid']">selected</if>
+										>{$eli.tagname}</if>
+									</foreach>
+								</select>
+							</div>
+						</div>
+						<div class="form-group">
+							<label for="from_year_education" class="col-sm-1 control-label">起止日期</label>
+
+							<div class="col-sm-9">
+								<select id="from_year_education" name="syear" class="form-control">
+									{//遍历起始年}
+									<foreach name="ssyear" item="starty">
+										<option value="{$starty}"
+										<if condition="$starty eq $e['syear']">selected</if>
+										>{$starty}</option>
+									</foreach>
+								</select>&nbsp;年&nbsp;
+
+								<select id="from_month_education" name="smonth" class="form-control">
+									{//遍历起始月}
+									<for start="1" end="13">
+										<option value="{$i}"
+										<if condition="$i eq $e['smonth']">selected</if>
+										>{$i}</option>
+									</for>
+								</select>&nbsp;月&nbsp;
+
+								-
+
+								<select id="to_year_education" name="tyear" class="form-control">
+									{//遍历终止年}
+									<foreach name="ssyear" item="stopy">
+										<option value="{$stopy}"
+										<if condition="$stopy eq $e['tyear']">selected</if>
+										>{$stopy}</option>
+									</foreach>
+								</select>&nbsp;年&nbsp;
+
+								<select id="to_month_education" name="tmonth" class="form-control">
+									{//遍历终止月}
+									<for start="1" end="13">
+										<option value="{$i}"
+										<if condition="$i eq $e['tyear']">selected</if>
+										>{$i}</option>
+									</for>
+								</select>&nbsp;月&nbsp;
+							</div>
+						</div>
+						<div class="form-group">
+							<div style="margin-left: 140px; margin-bottom: 20px;">
+								<button type="submit" class="btn btn-primary">保存</button>
+								&nbsp;
+								<button type="button" class="btn btn-default" onclick="cancelUpdateListItem('education','{$e.id}');">取消</button>
+							</div>
+						</div>
+					</form>
+				</foreach>
+				{/* 教育经历(显示) */}
+				<ul id="list_resume_education" class="resume_item_list">
+					<foreach name="education" item="e">
+						<li class="education" id="education_{$e.id}">
+							<span>{$e.syear}.{$e.smonth} - {$e.tyear}.{$e.tmonth}</span>&nbsp;&nbsp;&nbsp;&nbsp;
+							<span>{$e.school}</span>&nbsp;&nbsp;&nbsp;&nbsp;
+							<span>{$e.specialty}</span>&nbsp;&nbsp;&nbsp;&nbsp;
+							<span>
+							<foreach name="eidlist" item="elist">
+								<if condition="$elist.id eq $e['seid']">{$elist['tagname']}</if>
+							</foreach>
+							</span>
+							<span class="right">
+								<a href="javascript:;" onclick="editItem('education', '{$e.id}');" class="highlight">编辑</a>&nbsp;&nbsp;&nbsp;&nbsp;
+	                            <a href="javascript:;" onclick="deleteItem('education', '{$e.id}');" class="highlight">删除</a>
+	                        </span>
+						</li>
+					</foreach>
+				</ul>
+				{/* 教育经历添加按钮 */}
+				<div class="" style="margin: 30px 20px;">
+					<button id="add_btn_resume_education" type="button" class="btn btn-primary resume_btn_large" onclick="updateListItem('resume_education');" style="font-size:27px;"><i class="icon-plus"></i>&nbsp;添加
+					</button>
+				</div>
+			</div>
+			{/* 教育经历end */}
+		</div>
+		{/* 简历主体end */}
+	</div>
+	<div style="margin:30px 0;"></div>
+</div>
+<script type="text/javascript">
+	seajs.use(['$','form-ajax','bootbox'],function(){
+		var ajaxFrom = $('.ajaxForm');
+		ajaxFrom.ajaxForm({
+			dataType:'json',
+			success:function(data){
+				if(data.status > 0  && data.url){
+					bootbox.alert(data.info,function(){
+						window.location.href = data.url;
+						return false;
+					});
+				}else{
+					bootbox.alert({
+						message:data.info,
+						title: "提示信息"
+					});
+					return false;
+				}
+			}
+		})
+	});
+	//基本信息编辑按钮
+	function updateAtomicItem(item_name) {
+		$("#form_" + item_name).show();
+		$("#" + item_name).hide();
+	}
+
+	//基本信息取消按钮
+	function cancelUpdateAtomicItem(item_name) {
+		$("#" + item_name).show();
+		$("#form_" + item_name).hide().resetForm();
+	}
+
+	//工作,项目,教育 添加按钮
+	function updateListItem(item_name) {
+		$("#form_" + item_name).slideDown().resetForm();
+		$("#add_btn_" + item_name).hide();
+		$("#form_" + item_name + " input:hidden").val('');
+		$("#form_" + item_name + " input:text:first").focus();
+	}
+
+	//取消按钮
+	function cancelUpdateListItem(item_name, item_id) {
+		$("#form_resume_" + item_name + item_id).slideUp();
+		$("#" + item_name + "_" + item_id).show();
+		$("#add_btn_resume_" + item_name).show();
+
+	}
+
+	//编辑按钮
+	function editItem(item_name, item_id) {
+		$("#" + item_name + "_" + item_id).hide();
+		$("#add_btn_resume_" + item_name).hide();
+		$("#form_resume_" + item_name + item_id).slideDown();
+	}
+
+	//删除操作
+	function deleteItem(item_name, item_id) {
+		bootbox.setDefaults({locale:"zh_CN"});
+		bootbox.confirm('确定要删除吗?',function(res) {
+			if(res == true) {
+				$.ajax({
+					type : "post",
+					url : "{:U('Resume/delete')}",
+					data : "item=" + item_name + "&id=" + item_id,
+					success : function (data) {
+						if ( data ) {
+							bootbox.alert('成功删除');
+							$("#" + item_name + "_" + item_id).hide();
+						} else {
+							bootbox.alert('删除失败');
+						}
+					}
+				})
+			}
+		})
+	}
+
+	//提交申请
+	function doApply(job_id) {
+		$.ajax({
+			beforeSend : function () {
+				var basic = $("#form_resume_basic [name='id']").val();
+				var job = $("#form_resume_expect [name='desc']").val();
+				if (basic == '') {
+					bootbox.alert('请填写简历基本信息和求职意向后再申请');
+					return false;
+				};
+				if (job == '') {
+					bootbox.alert('请填写简历基本信息和求职意向后再申请');
+					return false;
+				}
+			},
+			type : "POST",
+			data : "jobid="+job_id,
+			url : "{:U('Resume/doApply')}",
+			success : function (data) {
+				if (data) {
+					bootbox.alert('简历已成功送出',function(){
+						location.href = "{:U('History/index')}";
+						return false;
+					})
+				} else {
+					bootbox.alert('投递失败,请重试或联系网站管理员');
+				}
+			}
+		});
+	}
+
+
+
+
+</script>
+<include file="./A/Home/View/Public/footer.html"/>

@@ -1,0 +1,190 @@
+﻿<include file="Public/header"/>
+<include file="Public/menu"/>
+<style>
+	button.cm { float: right; margin-left: 5px }
+</style>
+<div class="page-content">
+	<div class="page-header">
+		<h1>
+			分类
+			<small>
+				<i class="icon-double-angle-right"></i>
+				浏览分类
+			</small>
+		</h1>
+	</div>
+	<!-- /.page-header -->
+	<!-- PAGE CONTENT BEGINS -->
+	<div class="row">
+		<div class="col-xs-12">
+
+			<div class="row">
+				<div class="tabbable">
+					<ul class="nav nav-tabs" id="myTab">
+						<li class="active">
+							<a>
+								<i class="green icon-home bigger-110"></i>
+								浏览分类
+							</a>
+						</li>
+						<li>
+							<a href="{:U('Category/add')}">
+								<i class="green icon-edit bigger-110"></i>
+								添加分类
+							</a>
+						</li>
+					</ul>
+					<div class="tab-content" style="font-size: 14px">
+						<div class="row">
+							<div class="col-sm-6">
+								<div class="tabbable tabs-right">
+									<ul class="nav nav-tabs" id="myTab3">
+										<li
+										<empty name="mid">class="active"</empty>
+										>
+										<a href="{:U('index')}">
+
+											全部
+
+										</a>
+										</li>
+										<foreach name="module" item="v">
+											<li
+											<eq name="mid" value="$v.module">class="active"</eq>
+											>
+											<a href="{:U('index?mid='.$v['module'])}">
+												{$v.name}
+												<span class="badge badge-danger">{$v.num}</span>
+											</a>
+											</li>
+										</foreach>
+									</ul>
+									<div class="tab-content">
+										<div id="home3" class="tab-pane in active">
+											<div id="tree" class="tree"></div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- PAGE CONTENT END -->
+</div>
+</div>
+</div>
+<script>
+	seajs.use(['$', 'bootbox', 'fuelux-tree', 'ace-elements'], function ($) {
+		/*分类树 start*/
+		var DataSourceTree = function (options) {
+			this._data = options.data;
+			this._delay = options.delay;
+		};
+		var tree_data = {};
+		//从服务器端获取分类树
+		$.ajax({
+			url : "{:U('Category/lists?mid='.$mid)}",
+			dataType : "json",
+			type : "get",
+			async : false,
+			success : function (data) {
+				if ( data ) {
+					tree_data = data;
+				}
+			}
+		});
+		//编辑返回的分类树
+		DataSourceTree.prototype.data = function (options, callback) {
+			var self = this;
+			var $data = null;
+
+			if ( !("name" in options) && !("type" in options) ) {
+				$data = this._data;//the root tree
+				callback({data : $data});
+				return;
+			}
+			else if ( "type" in options && options.type == "folder" ) {
+				if ( "additionalParameters" in options && "children" in options.additionalParameters )
+					$data = options.additionalParameters.children;
+				else $data = {}//no data
+			}
+
+			if ( $data != null )//this setTimeout is only for mimicking some random delay
+				setTimeout(function () {
+					callback({data : $data});
+				}, parseInt(Math.random() * 500) + 200);
+
+		};
+
+		//配置fuelux-tree
+		var treeDataSource = new DataSourceTree({data : tree_data});
+		$('#tree').ace_tree({
+			dataSource : treeDataSource,
+			multiSelect : true,
+			loadingHTML : '<div class="tree-loading"><i class="icon-refresh icon-spin blue"></i></div>',
+			'open-icon' : 'icon-minus',
+			'close-icon' : 'icon-plus',
+			'selectable' : false
+		});
+		/*分类树 end*/
+
+
+		var htmls = '<button class="btn btn-minier btn-danger cm" id="del">删除</button>';
+		htmls += '<button class="btn btn-minier btn-info cm" id="edit">编辑</button>';
+		htmls += '<button class="btn btn-minier btn-inverse cm" id="addChild">添加子分类</button>';
+		htmls += '<button class="btn btn-minier btn-inverse cm" id="dataid"></button>';
+
+		/*鼠标划过时添加 编辑 删除 添加子分类按钮*/
+		$(document).on("mouseenter", ".tree-item,.tree-folder-header", function () {
+			$(this).append(htmls);
+			$(this).css({background : "#ededed"});
+			var id = $(this).find("span").attr('data-id');
+			$("button#dataid").html("ID:"+id);
+			$("button#edit").click(function (event) {
+				event.stopPropagation();//阻止事件冒泡
+				window.location.href = "{:U('edit')}?id=" + id;
+			});
+			$("button#addChild").click(function (event) {
+				event.stopPropagation();
+				window.location.href = "{:U('add')}?id=" + id;
+			})
+			$("button#del").click(function () {
+				event.stopPropagation();
+				if ( confirm("确定要删除该分类吗？") ) {
+					$.ajax({
+						url : "{:U('Category/delete')}",
+						data : {id : id},
+						type : "get",
+						success : function (data) {
+							if ( data.status > 0 ) {
+								bootbox.confirm(data.info, function (result) {
+									if ( result ) {
+										window.location.reload();
+										return false;
+									}
+								});
+							} else {
+								bootbox.alert({
+									message : data.info,
+									title : "提示信息"
+								});
+								return false;
+							}
+						}
+					})
+				}
+			});
+		});
+		//鼠标划出时删除按钮
+		$(document).on("mouseleave", ".tree-item,.tree-folder,.tree-folder-header", function () {
+			$("button").remove(".cm");
+			$(this).css({background : "#ffffff"});
+		});
+
+	})
+</script>
+<include file="Public/footer"/>
+
